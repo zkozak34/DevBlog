@@ -2,6 +2,7 @@
 using DevBlog.Entities.Concrete;
 using DevBlog.Repository.Abstract;
 using System.Data;
+using DevBlog.Entities.Dtos.Post;
 
 namespace DevBlog.Repository.Concrete.Dapper
 {
@@ -19,6 +20,46 @@ namespace DevBlog.Repository.Concrete.Dapper
             var query = "select * from posts order by id asc;";
             var response = await _connection.QueryAsync<Post>(query);
             return response.ToList();
+        }
+
+        public async Task<Post> GetById(int id)
+        {
+            var query = $"select * from posts where id={id}";
+            var response = await _connection.QuerySingleAsync<Post>(query);
+            return response;
+        }
+
+        public async Task<bool> Add(PostAddDto postAddDto)
+        {
+            var query = "insert into posts(title,content,thumbnailimage,authorid,categoryid) values(@title,@content,@thumbnailimage,@authorid,@categoryid)";
+            var response = await _connection.ExecuteAsync(query, new
+            {
+                title=postAddDto.Title, content=postAddDto.Content,
+                thumbnailimage=postAddDto.ThumbnailImage, 
+                authorid=postAddDto.AuthorId, categoryid=postAddDto.CategoryId
+            });
+            return response == 1 ? true : false;
+        }
+
+        public async Task<bool> Update(int id, PostUpdateDto postUpdateDto)
+        {
+            var query =
+                $"update posts set title=@title, content=@content, thumbnailimage=@thumbnailimage, authorid=@authorid, categoryid=@categoryid where id={id}";
+            var response = await _connection.ExecuteAsync(query,
+                new
+                {
+                    title = postUpdateDto.Title, content = postUpdateDto.Content,
+                    thumbnailimage = postUpdateDto.ThumbnailImage, authorid = postUpdateDto.AuthorId,
+                    categoryid = postUpdateDto.CategoryId
+                });
+            return response == 1 ? true : false;
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var query = $"delete from posts where id={id}";
+            var response = await _connection.ExecuteAsync(query);
+            return response == 1 ? true : false;
         }
     }
 }
