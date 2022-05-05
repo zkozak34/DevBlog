@@ -1,6 +1,7 @@
 using DevBlog.Repository;
-using DevBlog.Repository.Concrete.EntityFramework;
-using Microsoft.EntityFrameworkCore;
+using DevBlog.Repository.Abstract;
+using DevBlog.Repository.Concrete.Dapper;
+using DevBlog.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddRepositoryService(builder.Configuration.GetConnectionString("MySQL"));
+builder.Services.AddScoped<IPostRepository, PostRepository>();
+builder.Services.AddBusinessService();
 
 var app = builder.Build();
 

@@ -9,6 +9,6 @@ namespace DevBlog.Entities.Concrete
         public string Password { get; set; }
         public string ProfileImage { get; set; }
         public string Overview { get; set; }
-        public List<Post> Posts { get; set; }
+        public int PostId { get; set; }
     }
 }

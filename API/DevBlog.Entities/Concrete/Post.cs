@@ -1,5 +1,4 @@
 ﻿using DevBlog.Entities.Abstract;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DevBlog.Entities.Concrete
 {
@@ -11,12 +10,8 @@ namespace DevBlog.Entities.Concrete
 
         public string ThumbnailImage { get; set; }
 
-        [ForeignKey("Author")]
         public int AuthorId { get; set; }
-        public Author Author { get; set; }
 
-        [ForeignKey("Category")]
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
     }
 }

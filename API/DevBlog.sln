@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevBlog.Service", "DevBlog.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevBlog.WebAPI", "DevBlog.WebAPI\DevBlog.WebAPI.csproj", "{2F89040E-7CF7-4574-99C0-48D92A6AB5FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DevBlog.Entities", "DevBlog.Entities\DevBlog.Entities.csproj", "{AFFB5ADE-5F26-42D3-9DA0-B1856E85467F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DevBlog.Entities", "DevBlog.Entities\DevBlog.Entities.csproj", "{AFFB5ADE-5F26-42D3-9DA0-B1856E85467F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

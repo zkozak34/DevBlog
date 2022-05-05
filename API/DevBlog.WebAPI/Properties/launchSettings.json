@@ -12,7 +12,7 @@
     "DevBlog.WebAPI": {
       "commandName": "Project",
       "dotnetRunMessages": true,
-      "launchBrowser": true,
+      "launchBrowser": false,
       "launchUrl": "swagger",
       "applicationUrl": "https://localhost:7143;http://localhost:5143",
       "environmentVariables": {

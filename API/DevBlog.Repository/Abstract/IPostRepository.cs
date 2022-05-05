@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DevBlog.Entities.Concrete;
 
 namespace DevBlog.Repository.Abstract
 {
     public interface IPostRepository
     {
+        Task<List<Post>> GetAll();
     }
 }
