@@ -5,6 +5,7 @@ using DevBlog.Service.Services.Commands.Posts.Delete;
 using DevBlog.Service.Services.Commands.Posts.Update;
 using DevBlog.Service.Services.Queries.Posts.GetAll;
 using DevBlog.Service.Services.Queries.Posts.GetById;
+using DevBlog.WebAPI.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +29,7 @@ namespace DevBlog.WebAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [ServiceFilter(typeof(CheckExistIdFilter))]
         public async Task<IActionResult> GetById(int id)
         {
             var response = await _mediator.Send(new PostGetByIdQuery() {Id = id});
@@ -42,6 +44,7 @@ namespace DevBlog.WebAPI.Controllers
         }
 
         // TODO: UPDATEDATE COLUMN DİD NOT CHANGE
+        [ServiceFilter(typeof(CheckExistIdFilter))]
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, PostUpdateDto postUpdateDto)
         {
@@ -49,6 +52,7 @@ namespace DevBlog.WebAPI.Controllers
             return new ObjectResult(response) {StatusCode = response.StatusCode};
         }
 
+        [ServiceFilter(typeof(CheckExistIdFilter))]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {

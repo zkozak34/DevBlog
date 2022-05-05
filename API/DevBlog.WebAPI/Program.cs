@@ -2,6 +2,8 @@ using DevBlog.Repository;
 using DevBlog.Repository.Abstract;
 using DevBlog.Repository.Concrete.Dapper;
 using DevBlog.Service;
+using DevBlog.WebAPI.Filters;
+using DevBlog.WebAPI.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,11 @@ builder.Services.AddRepositoryService(builder.Configuration.GetConnectionString(
 builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddBusinessService();
 
+builder.Services.AddScoped<CheckExistIdFilter>();
+
 var app = builder.Build();
+
+app.UseGlobalExceptionMiddleware();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
