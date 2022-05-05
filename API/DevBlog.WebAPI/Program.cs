@@ -33,6 +33,7 @@ builder.Services.AddScoped<CheckExistIdFilter>();
 var app = builder.Build();
 
 // Custom Middlewares
+app.UseMiddleware<IPAddressControlMiddleware>();
 app.UseGlobalExceptionMiddleware();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
