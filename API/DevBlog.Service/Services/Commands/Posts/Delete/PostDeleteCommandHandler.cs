@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DevBlog.Core.Dtos.ResponseDto;
+﻿using DevBlog.Core.Dtos.ResponseDto;
 using DevBlog.Repository.Abstract;
 using MediatR;
 
@@ -21,7 +16,7 @@ namespace DevBlog.Service.Services.Commands.Posts.Delete
         public async Task<ResponseDto<NoContent>> Handle(PostDeleteCommand request, CancellationToken cancellationToken)
         {
             var responseFromDb = await _postRepository.Delete(request.Id);
-            if(responseFromDb)
+            if (responseFromDb)
                 return ResponseDto<NoContent>.Success(200);
             return ResponseDto<NoContent>.Fail(500);
         }

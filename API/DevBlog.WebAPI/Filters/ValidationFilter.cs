@@ -12,7 +12,8 @@ namespace DevBlog.WebAPI.Filters
             {
                 var errors = context.ModelState.Values.SelectMany(x => x.Errors).Select(x => x.ErrorMessage).ToList();
                 context.Result = new BadRequestObjectResult(ResponseDto<NoContent>.Fail(errors, 400));
-;            }
+                ;
+            }
         }
     }
 }

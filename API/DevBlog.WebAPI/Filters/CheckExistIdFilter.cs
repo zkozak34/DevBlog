@@ -1,5 +1,4 @@
 ﻿using DevBlog.Core.Dtos.ResponseDto;
-using DevBlog.Entities.Abstract;
 using DevBlog.Repository.Abstract;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
