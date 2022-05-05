@@ -21,7 +21,7 @@ namespace DevBlog.WebAPI.Filters
             Console.WriteLine(id);
 
             var idExist = await _postRepository.GetById(id);
-            if (idExist.GetType() == typeof(IEntity))
+            if (idExist != null)
             {
                 await next.Invoke();
                 return;
