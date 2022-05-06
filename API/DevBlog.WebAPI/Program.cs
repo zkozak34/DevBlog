@@ -28,7 +28,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddRepositoryService(builder.Configuration.GetConnectionString("MySQL"));
 // Business layer registration
 builder.Services.AddBusinessService();
-builder.Services.AddScoped<CheckExistIdFilter>();
 
 var app = builder.Build();
 

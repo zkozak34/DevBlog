@@ -9,6 +9,7 @@ namespace DevBlog.Service.DependencyResolvers.Autofac
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<PostRepository>().As<IPostRepository>().InstancePerLifetimeScope();
+            builder.RegisterType<CategoryRepository>().As<ICategoryRepository>().InstancePerLifetimeScope();
 
         }
     }

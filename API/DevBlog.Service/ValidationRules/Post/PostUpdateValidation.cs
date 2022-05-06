@@ -1,7 +1,7 @@
 ﻿using DevBlog.Entities.Dtos.Post;
 using FluentValidation;
 
-namespace DevBlog.Service.ValidationRules
+namespace DevBlog.Service.ValidationRules.Post
 {
     public class PostUpdateValidation : AbstractValidator<PostUpdateDto>
     {
