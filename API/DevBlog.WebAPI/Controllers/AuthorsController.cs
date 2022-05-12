@@ -4,6 +4,7 @@ using DevBlog.Service.Services.Commands.Authors.Delete;
 using DevBlog.Service.Services.Commands.Authors.Update;
 using DevBlog.Service.Services.Queries.Authors.GetAll;
 using DevBlog.Service.Services.Queries.Authors.GetById;
+using DevBlog.Service.Services.Queries.Authors.Login;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -53,6 +54,13 @@ namespace DevBlog.WebAPI.Controllers
         {
             var response = await _mediator.Send(new AuthorDeleteCommand() { Id = id });
             return new ObjectResult(response) { StatusCode = response.StatusCode };
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Login(string email, string password)
+        {
+            var response = await _mediator.Send(new AuthorLoginQuery() {Email = email, Password = password});
+            return new ObjectResult(response) {StatusCode = response.StatusCode};
         }
     }
 }

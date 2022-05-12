@@ -65,5 +65,12 @@ namespace DevBlog.Repository.Concrete.Dapper
             var response = await _connection.ExecuteAsync(query);
             return response == 1 ? true : false;
         }
+
+        public async Task<AuthorDto> Login(string email, string password)
+        {
+            var query = "select * from authors where email=@email and password=@password";
+            var response = await _connection.QuerySingleAsync<AuthorDto>(query, new {email, password});
+            return response;
+        }
     }
 }
