@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Dapper;
+﻿using Dapper;
 using DevBlog.Entities.Concrete;
 using DevBlog.Entities.Dtos.Category;
 using DevBlog.Repository.Abstract;
+using System.Data;
 
 namespace DevBlog.Repository.Concrete.Dapper
 {
@@ -36,14 +31,14 @@ namespace DevBlog.Repository.Concrete.Dapper
         public async Task<bool> Add(CategoryAddDto categoryAddDto)
         {
             var query = "insert into categories(title, createdDate) values(@title, @createddate)";
-            var response = await _connection.ExecuteAsync(query, new {title = categoryAddDto.Title, createddate = DateTime.Now});
+            var response = await _connection.ExecuteAsync(query, new { title = categoryAddDto.Title, createddate = DateTime.Now });
             return response == 1 ? true : false;
         }
 
         public async Task<bool> Update(int id, CategoryUpdateDto categoryUpdateDto)
         {
             var query = $"update categories set title=@title, updateddate=@updateddate where id={id}";
-            var response = await _connection.ExecuteAsync(query, new {title = categoryUpdateDto.Title, updateddate = DateTime.Now});
+            var response = await _connection.ExecuteAsync(query, new { title = categoryUpdateDto.Title, updateddate = DateTime.Now });
             return response == 1 ? true : false;
         }
 
