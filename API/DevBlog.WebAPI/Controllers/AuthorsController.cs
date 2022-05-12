@@ -6,10 +6,12 @@ using DevBlog.Service.Services.Queries.Authors.GetAll;
 using DevBlog.Service.Services.Queries.Authors.GetById;
 using DevBlog.Service.Services.Queries.Authors.Login;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevBlog.WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class AuthorsController : ControllerBase
@@ -56,8 +58,9 @@ namespace DevBlog.WebAPI.Controllers
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
+        [AllowAnonymous]
         [HttpPost("[action]")]
-        public async Task<IActionResult> Login([FromBody]AuthorLoginDto authorLoginDto)
+        public async Task<IActionResult> Login([FromBody] AuthorLoginDto authorLoginDto)
         {
             var response = await _mediator.Send(new AuthorLoginQuery() { Email = authorLoginDto.Email, Password = authorLoginDto.Password });
             return new ObjectResult(response) { StatusCode = response.StatusCode };

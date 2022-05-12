@@ -2,6 +2,7 @@
 using DevBlog.Entities.Dtos.Author;
 using DevBlog.Repository.Abstract;
 using System.Data;
+using DevBlog.Entities.Concrete;
 
 namespace DevBlog.Repository.Concrete.Dapper
 {
@@ -66,10 +67,10 @@ namespace DevBlog.Repository.Concrete.Dapper
             return response == 1 ? true : false;
         }
 
-        public async Task<AuthorDto> Login(string email, string password)
+        public async Task<Author> Login(string email, string password)
         {
             var query = "select * from authors where email=@email and password=@password";
-            var response = await _connection.QuerySingleAsync<AuthorDto>(query, new { email, password });
+            var response = await _connection.QuerySingleAsync<Author>(query, new { email, password });
             return response;
         }
     }

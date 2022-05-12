@@ -5,10 +5,12 @@ using DevBlog.Service.Services.Commands.Categories.Update;
 using DevBlog.Service.Services.Queries.Categories.GetAll;
 using DevBlog.Service.Services.Queries.Categories.GetById;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevBlog.WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class CategoriesController : ControllerBase
@@ -19,6 +21,7 @@ namespace DevBlog.WebAPI.Controllers
             _mediator = mediator;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
@@ -26,6 +29,7 @@ namespace DevBlog.WebAPI.Controllers
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {

@@ -1,4 +1,5 @@
-﻿using DevBlog.Entities.Dtos.Author;
+﻿using DevBlog.Entities.Concrete;
+using DevBlog.Entities.Dtos.Author;
 
 namespace DevBlog.Repository.Abstract
 {
@@ -9,6 +10,6 @@ namespace DevBlog.Repository.Abstract
         Task<bool> Add(AuthorAddDto authorAddDto);
         Task<bool> Update(int id, AuthorUpdateDto authorUpdateDto);
         Task<bool> Delete(int id);
-        Task<AuthorDto> Login(string email, string password);
+        Task<Author> Login(string email, string password);
     }
 }
