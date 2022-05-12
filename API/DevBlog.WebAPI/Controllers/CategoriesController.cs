@@ -4,7 +4,6 @@ using DevBlog.Service.Services.Commands.Categories.Delete;
 using DevBlog.Service.Services.Commands.Categories.Update;
 using DevBlog.Service.Services.Queries.Categories.GetAll;
 using DevBlog.Service.Services.Queries.Categories.GetById;
-using DevBlog.WebAPI.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,7 +36,7 @@ namespace DevBlog.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(CategoryAddDto categoryAddDto)
         {
-            var response = await _mediator.Send(new CategoryAddCommand() { CategoryAddDto= categoryAddDto});
+            var response = await _mediator.Send(new CategoryAddCommand() { CategoryAddDto = categoryAddDto });
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 

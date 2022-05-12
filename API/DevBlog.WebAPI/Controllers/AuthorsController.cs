@@ -1,9 +1,9 @@
-﻿using DevBlog.Entities.Dtos.Post;
-using DevBlog.Service.Services.Commands.Posts.Add;
-using DevBlog.Service.Services.Commands.Posts.Delete;
-using DevBlog.Service.Services.Commands.Posts.Update;
-using DevBlog.Service.Services.Queries.Posts.GetAll;
-using DevBlog.Service.Services.Queries.Posts.GetById;
+﻿using DevBlog.Entities.Dtos.Author;
+using DevBlog.Service.Services.Commands.Authors.Add;
+using DevBlog.Service.Services.Commands.Authors.Delete;
+using DevBlog.Service.Services.Commands.Authors.Update;
+using DevBlog.Service.Services.Queries.Authors.GetAll;
+using DevBlog.Service.Services.Queries.Authors.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,10 +11,11 @@ namespace DevBlog.WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PostsController : ControllerBase
+    public class AuthorsController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public PostsController(IMediator mediator)
+
+        public AuthorsController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -22,35 +23,35 @@ namespace DevBlog.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var response = await _mediator.Send(new PostGetAllQuery());
+            var response = await _mediator.Send(new AuthorGetAllQuery());
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var response = await _mediator.Send(new PostGetByIdQuery() { Id = id });
+            var response = await _mediator.Send(new AuthorGetByIdQuery() { Id = id });
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(PostAddDto postAddDto)
+        public async Task<IActionResult> Add(AuthorAddDto authorAddDto)
         {
-            var response = await _mediator.Send(new PostAddCommand() { PostAddDto = postAddDto });
+            var response = await _mediator.Send(new AuthorAddCommand() { AddCommand = authorAddDto });
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, PostUpdateDto postUpdateDto)
+        public async Task<IActionResult> Update(int id, AuthorUpdateDto authorUpdateDto)
         {
-            var response = await _mediator.Send(new PostUpdateCommand() { PostUpdateDto = postUpdateDto, Id = id });
+            var response = await _mediator.Send(new AuthorUpdateCommand() { Id = id, AuthorUpdateDto = authorUpdateDto });
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _mediator.Send(new PostDeleteCommand() { Id = id });
+            var response = await _mediator.Send(new AuthorDeleteCommand() { Id = id });
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
     }

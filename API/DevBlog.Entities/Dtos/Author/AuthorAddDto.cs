@@ -1,8 +1,8 @@
 ﻿using DevBlog.Entities.Abstract;
 
-namespace DevBlog.Entities.Concrete
+namespace DevBlog.Entities.Dtos.Author
 {
-    public class Author : BaseEntity
+    public class AuthorAddDto : IDto
     {
         public string FullName { get; set; }
         public string Email { get; set; }
