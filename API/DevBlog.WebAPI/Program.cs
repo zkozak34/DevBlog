@@ -27,7 +27,7 @@ builder.Services.AddSwaggerGen();
 // Data Access layer registration
 builder.Services.AddRepositoryService(builder.Configuration.GetConnectionString("MySQL"));
 // Business layer registration
-builder.Services.AddBusinessService();
+builder.Services.AddBusinessService(builder.Configuration["SaltKey"]);
 
 var app = builder.Build();
 

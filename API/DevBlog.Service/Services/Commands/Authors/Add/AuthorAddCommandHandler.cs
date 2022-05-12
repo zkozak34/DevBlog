@@ -1,6 +1,7 @@
 ﻿using DevBlog.Core.Dtos.ResponseDto;
 using DevBlog.Entities.Dtos.Author;
 using DevBlog.Repository.Abstract;
+using DevBlog.Service.Utilities.Hashing;
 using MediatR;
 
 namespace DevBlog.Service.Services.Commands.Authors.Add
@@ -22,7 +23,7 @@ namespace DevBlog.Service.Services.Commands.Authors.Add
                 FullName = request.AddCommand.FullName,
                 Email = request.AddCommand.Email,
                 Overview = request.AddCommand.Overview,
-                Password = request.AddCommand.Password,
+                Password = Security.Encrypt(request.AddCommand.Password),
                 ProfileImage = request.AddCommand.ProfileImage,
 
             });
