@@ -1,7 +1,7 @@
 ﻿using DevBlog.Core.Dtos.ResponseDto;
+using DevBlog.Core.Utilities.Hashing;
 using DevBlog.Entities.Dtos.Author;
 using DevBlog.Repository.Abstract;
-using DevBlog.Service.Utilities.Hashing;
 using MediatR;
 
 namespace DevBlog.Service.Services.Commands.Authors.Add
@@ -15,7 +15,6 @@ namespace DevBlog.Service.Services.Commands.Authors.Add
             _authorRepository = authorRepository;
         }
 
-        // TODO: PASSWORD HASH!!!!
         public async Task<ResponseDto<NoContent>> Handle(AuthorAddCommand request, CancellationToken cancellationToken)
         {
             var responseFromDb = await _authorRepository.Add(new AuthorAddDto()
@@ -23,7 +22,7 @@ namespace DevBlog.Service.Services.Commands.Authors.Add
                 FullName = request.AddCommand.FullName,
                 Email = request.AddCommand.Email,
                 Overview = request.AddCommand.Overview,
-                Password = Security.Encrypt(request.AddCommand.Password),
+                Password = Security.Encrypt(request.AddCommand.Password, ServiceRegistration.SaltKey),
                 ProfileImage = request.AddCommand.ProfileImage,
 
             });

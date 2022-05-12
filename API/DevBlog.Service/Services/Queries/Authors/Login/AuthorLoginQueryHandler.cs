@@ -1,7 +1,7 @@
 ﻿using DevBlog.Core.Dtos.ResponseDto;
+using DevBlog.Core.Utilities.Hashing;
 using DevBlog.Entities.Dtos.Author;
 using DevBlog.Repository.Abstract;
-using DevBlog.Service.Utilities.Hashing;
 using MediatR;
 
 namespace DevBlog.Service.Services.Queries.Authors.Login
@@ -17,7 +17,7 @@ namespace DevBlog.Service.Services.Queries.Authors.Login
 
         public async Task<ResponseDto<AuthorDto>> Handle(AuthorLoginQuery request, CancellationToken cancellationToken)
         {
-            var responseFromDb = await _authorRepository.Login(request.Email, Security.Encrypt(request.Password));
+            var responseFromDb = await _authorRepository.Login(request.Email, Security.Encrypt(request.Password, ServiceRegistration.SaltKey));
             if(responseFromDb.Email != null)
                 return ResponseDto<AuthorDto>.Success(responseFromDb, 200);
             return ResponseDto<AuthorDto>.Fail(500);
