@@ -1,0 +1,449 @@
+{
+	"info": {
+		"_postman_id": "0eca2c06-9e3f-417f-a266-15885d0f3864",
+		"name": "DevBlog",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Author",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/authors",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/authors/1",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"string\",\r\n  \"email\": \"string\",\r\n  \"password\": \"string\",\r\n  \"profileImage\": \"string\",\r\n  \"overview\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/authors",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"fullName\": \"string\",\r\n  \"email\": \"string\",\r\n  \"profileImage\": \"string\",\r\n  \"overview\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/authors/1",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"string\",\r\n  \"password\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/authors/login",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"authors",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/authors/1",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"authors",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/categories",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/categories/1",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/categories",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"categories"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/categories/1",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/categories/1",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"categories",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Post",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/posts",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/posts/1",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"string\",\r\n  \"content\": \"string\",\r\n  \"thumbnailImage\": \"string\",\r\n  \"authorId\": 0,\r\n  \"categoryId\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/posts",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"posts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"title\": \"string\",\r\n  \"content\": \"string\",\r\n  \"thumbnailImage\": \"string\",\r\n  \"authorId\": 0,\r\n  \"categoryId\": 0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/posts/1",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/posts/1",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"posts",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "localhost",
+			"type": "default"
+		},
+		{
+			"key": "base_port",
+			"value": "7143",
+			"type": "default"
+		}
+	]
+}
