@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace DevBlog.WebAPI.Middlewares
+﻿namespace DevBlog.WebAPI.Middlewares
 {
     public class IPAddressControlMiddleware
     {
@@ -15,10 +13,14 @@ namespace DevBlog.WebAPI.Middlewares
 
         public async Task Invoke(HttpContext context)
         {
-            var ipAddressFromRequest = context.Connection.RemoteIpAddress;
-            var ipAddressFromHosting = IPAddress.Parse(_configuration["AllowedAccess:WhiteIPAddress"]);
+            var ipAddressFromRequest = context.Connection.RemoteIpAddress.ToString();
+            var ipAddressFromHosting = new List<string>();
+            foreach (var s in _configuration["AllowedAccess:WhiteIPAddress"].Split(","))
+            {
+                ipAddressFromHosting.Add(s);
+            }
             //var ipAddressFromHosting = Dns.GetHostAddresses(new Uri(_configuration["AllowedAccess:WhiteIPAddress"]).Host)[0];
-            if (ipAddressFromRequest!.Equals(ipAddressFromHosting))
+            if (ipAddressFromHosting.Contains(ipAddressFromRequest))
             {
                 await _requestDelegate.Invoke(context);
             }

@@ -59,8 +59,8 @@ namespace DevBlog.WebAPI.Controllers
         [HttpPost("[action]")]
         public async Task<IActionResult> Login(string email, string password)
         {
-            var response = await _mediator.Send(new AuthorLoginQuery() {Email = email, Password = password});
-            return new ObjectResult(response) {StatusCode = response.StatusCode};
+            var response = await _mediator.Send(new AuthorLoginQuery() { Email = email, Password = password });
+            return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
     }
 }

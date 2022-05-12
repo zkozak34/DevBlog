@@ -3,7 +3,7 @@ using System.Text;
 
 namespace DevBlog.Core.Utilities.Hashing
 {
-    public class Security 
+    public class Security
     {
         public static string Encrypt(string plainText, string saltKey)
         {
