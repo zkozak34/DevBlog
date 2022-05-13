@@ -11,6 +11,11 @@ namespace DevBlog.Service.ValidationRules.Category
                 .NotNull()
                 .NotEmpty()
                 .MinimumLength(3);
+
+            RuleFor(x => x.Path)
+                .NotNull()
+                .NotEmpty()
+                .MinimumLength(3);
         }
     }
 }

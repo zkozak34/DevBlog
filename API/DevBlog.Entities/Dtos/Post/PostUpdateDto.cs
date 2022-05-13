@@ -8,6 +8,8 @@ namespace DevBlog.Entities.Dtos.Post
 
         public string Content { get; set; }
 
+        public string Overview { get; set; }
+
         public string ThumbnailImage { get; set; }
 
         public int AuthorId { get; set; }

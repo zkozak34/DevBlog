@@ -15,6 +15,11 @@ namespace DevBlog.Service.ValidationRules.Post
                 .NotNull()
                 .MinimumLength(8);
 
+            RuleFor(x => x.Overview)
+                .NotNull()
+                .MinimumLength(8)
+                .MaximumLength(250);
+
             RuleFor(x => x.ThumbnailImage)
                 .NotNull();
 
