@@ -29,6 +29,18 @@ builder.Services.AddRepositoryService(builder.Configuration.GetConnectionString(
 // Business layer registration
 builder.Services.AddBusinessService(builder.Configuration["SaltKey"]);
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
+    {
+        var origins = builder.Configuration["AllowedAccess:AllowOrigins"].Split(";");
+        policy.WithOrigins(origins)
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 var app = builder.Build();
 
 // Custom Middlewares
@@ -42,6 +54,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthentication();
 

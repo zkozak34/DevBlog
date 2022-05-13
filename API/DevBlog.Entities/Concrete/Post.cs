@@ -8,6 +8,7 @@ namespace DevBlog.Entities.Concrete
 
         public string Content { get; set; }
 
+        public string Overview { get; set; }
         public string ThumbnailImage { get; set; }
 
         public int AuthorId { get; set; }

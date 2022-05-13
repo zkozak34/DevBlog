@@ -31,11 +31,12 @@ namespace DevBlog.Repository.Concrete.Dapper
 
         public async Task<bool> Add(PostAddDto postAddDto)
         {
-            var query = "insert into posts(title,content,thumbnailimage,authorid,categoryid,createddate) values(@title,@content,@thumbnailimage,@authorid,@categoryid,@createddate)";
+            var query = "insert into posts(title,content, overview,thumbnailimage,authorid,categoryid,createddate) values(@title,@content,@overview,@thumbnailimage,@authorid,@categoryid,@createddate)";
             var response = await _connection.ExecuteAsync(query, new
             {
                 title = postAddDto.Title,
                 content = postAddDto.Content,
+                overview = postAddDto.Overview,
                 thumbnailimage = postAddDto.ThumbnailImage,
                 authorid = postAddDto.AuthorId,
                 categoryid = postAddDto.CategoryId,
@@ -47,12 +48,13 @@ namespace DevBlog.Repository.Concrete.Dapper
         public async Task<bool> Update(int id, PostUpdateDto postUpdateDto)
         {
             var query =
-                $"update posts set title=@title, content=@content, thumbnailimage=@thumbnailimage, authorid=@authorid, categoryid=@categoryid, updateddate=@updateddate where id={id}";
+                $"update posts set title=@title, content=@content, overview=@overview thumbnailimage=@thumbnailimage, authorid=@authorid, categoryid=@categoryid, updateddate=@updateddate where id={id}";
             var response = await _connection.ExecuteAsync(query,
                 new
                 {
                     title = postUpdateDto.Title,
                     content = postUpdateDto.Content,
+                    overview = postUpdateDto.Overview,
                     thumbnailimage = postUpdateDto.ThumbnailImage,
                     authorid = postUpdateDto.AuthorId,
                     categoryid = postUpdateDto.CategoryId,
