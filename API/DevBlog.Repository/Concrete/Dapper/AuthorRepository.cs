@@ -1,8 +1,8 @@
 ﻿using Dapper;
+using DevBlog.Entities.Concrete;
 using DevBlog.Entities.Dtos.Author;
 using DevBlog.Repository.Abstract;
 using System.Data;
-using DevBlog.Entities.Concrete;
 
 namespace DevBlog.Repository.Concrete.Dapper
 {

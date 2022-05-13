@@ -30,7 +30,7 @@ namespace DevBlog.Service.Utilities.Security
             var userInfoFromToken = new Dictionary<string, string>();
             var tokenHandler = new JwtSecurityTokenHandler();
             var decodeToken = tokenHandler.ReadJwtToken(token);
-            userInfoFromToken.Add("userId",decodeToken.Claims.First(claim => claim.Type == ClaimTypes.PrimarySid).ToString());
+            userInfoFromToken.Add("userId", decodeToken.Claims.First(claim => claim.Type == ClaimTypes.PrimarySid).ToString());
             userInfoFromToken.Add("email", decodeToken.Claims.First(claim => claim.Type == ClaimTypes.Email).ToString());
             return userInfoFromToken;
         }

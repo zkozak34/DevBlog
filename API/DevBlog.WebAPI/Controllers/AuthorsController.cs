@@ -1,5 +1,4 @@
-﻿using System.Security.Claims;
-using DevBlog.Entities.Dtos.Author;
+﻿using DevBlog.Entities.Dtos.Author;
 using DevBlog.Service.Services.Commands.Authors.Add;
 using DevBlog.Service.Services.Commands.Authors.Delete;
 using DevBlog.Service.Services.Commands.Authors.Update;

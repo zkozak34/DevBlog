@@ -1,5 +1,7 @@
 ﻿using Dapper;
 using DevBlog.Entities.Concrete;
+using DevBlog.Entities.Dtos.Author;
+using DevBlog.Entities.Dtos.Category;
 using DevBlog.Entities.Dtos.Post;
 using DevBlog.Repository.Abstract;
 using System.Data;
@@ -19,6 +21,20 @@ namespace DevBlog.Repository.Concrete.Dapper
         {
             var query = "select * from posts order by id asc;";
             var response = await _connection.QueryAsync<Post>(query);
+            return response.ToList();
+        }
+
+        public async Task<List<PostFullDto>> GetAllFull()
+        {
+            var query =
+                "select p.Id, p.Title, p.Content, p.CreatedDate, p.Overview, p.ThumbnailImage, c.Id as cId, c.Title, c.Path, a.Id as aId, a.FullName, a.ProfileImage from posts as p inner join categories c on p.CategoryId = c.Id inner join authors a on p.AuthorId = a.Id;";
+            var response = await _connection.QueryAsync<PostFullDto, CategoryDto, AuthorDto, PostFullDto>(query,
+                (postFullDto, category, author) =>
+                {
+                    postFullDto.Category = category;
+                    postFullDto.Author = author;
+                    return postFullDto;
+                }, splitOn: "cId, aId");
             return response.ToList();
         }
 
