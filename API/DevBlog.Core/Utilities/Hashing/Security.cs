@@ -5,7 +5,11 @@ namespace DevBlog.Core.Utilities.Hashing
 {
     public class Security
     {
+<<<<<<< Updated upstream:API/DevBlog.Core/Utilities/Hashing/Security.cs
         public static string Encrypt(string plainText, string saltKey)
+=======
+        public static string Encrypt(string plainText)
+>>>>>>> Stashed changes:API/DevBlog.Service/Utilities/Hashing/Security.cs
         {
             using (SHA256 cryptoService = SHA256.Create())
             {
