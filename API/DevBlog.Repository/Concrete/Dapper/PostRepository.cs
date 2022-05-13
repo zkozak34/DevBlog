@@ -64,7 +64,7 @@ namespace DevBlog.Repository.Concrete.Dapper
         public async Task<bool> Update(int id, PostUpdateDto postUpdateDto)
         {
             var query =
-                $"update posts set title=@title, content=@content, overview=@overview thumbnailimage=@thumbnailimage, authorid=@authorid, categoryid=@categoryid, updateddate=@updateddate where id={id}";
+                $"update posts set title=@title, content=@content, overview=@overview, thumbnailimage=@thumbnailimage, authorid=@authorid, categoryid=@categoryid, updateddate=@updateddate where id={id}";
             var response = await _connection.ExecuteAsync(query,
                 new
                 {

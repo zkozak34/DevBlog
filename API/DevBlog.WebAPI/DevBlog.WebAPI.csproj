@@ -14,4 +14,9 @@
     <ProjectReference Include="..\DevBlog.Service\DevBlog.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\resource\post-images\" />
+  </ItemGroup>
+
 </Project>

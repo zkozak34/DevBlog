@@ -5,6 +5,7 @@ using DevBlog.Service.Services.Commands.Posts.Update;
 using DevBlog.Service.Services.Queries.Posts.GetAll;
 using DevBlog.Service.Services.Queries.Posts.GetAllFull;
 using DevBlog.Service.Services.Queries.Posts.GetById;
+using DevBlog.WebAPI.Filters;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,9 +18,11 @@ namespace DevBlog.WebAPI.Controllers
     public class PostsController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public PostsController(IMediator mediator)
+        private readonly IWebHostEnvironment _webHostEnvironment;
+        public PostsController(IMediator mediator, IWebHostEnvironment webHostEnvironment)
         {
             _mediator = mediator;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [AllowAnonymous]
@@ -65,6 +68,37 @@ namespace DevBlog.WebAPI.Controllers
         {
             var response = await _mediator.Send(new PostDeleteCommand() { Id = id });
             return new ObjectResult(response) { StatusCode = response.StatusCode };
+        }
+
+        [FileExtensionControlFilter]
+        [HttpPost("[action]/{id}")]
+        public async Task<IActionResult> Upload(int id)
+        {
+            var post = await _mediator.Send(new PostGetByIdQuery() { Id = id });
+            string fileName = Request.Form.Files.GetFile("file").FileName;
+            string uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, "resource/post-images");
+            if (!Directory.Exists(uploadPath)) Directory.CreateDirectory(uploadPath);
+            
+            Random r = new Random();
+            string newFileName = $"{r.NextInt64()}{Path.GetExtension(fileName)}";
+            string fullPath = Path.Combine(uploadPath, newFileName);
+
+            await using var fileStream = new FileStream(fullPath, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite, 1024 * 1024, useAsync: false);
+            if(Directory.Exists(Path.Combine(uploadPath,post.Data.ThumbnailImage))) Directory.Delete(Path.Combine(uploadPath, post.Data.ThumbnailImage));
+            await fileStream.CopyToAsync(fileStream); 
+            await fileStream.FlushAsync(); 
+            await _mediator.Send(new PostUpdateCommand() {Id = id, PostUpdateDto = new PostUpdateDto() 
+                {
+                    Title = post.Data.Title,
+                    CategoryId = post.Data.CategoryId,
+                    AuthorId= post.Data.AuthorId,
+                    Content= post.Data.Content,
+                    Overview = post.Data.Overview,
+                    ThumbnailImage = newFileName.ToString()
+                }
+            });
+        
+            return Ok(fileName);
         }
     }
 }
