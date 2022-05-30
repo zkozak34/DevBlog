@@ -1,8 +1,10 @@
 {
 	"info": {
-		"_postman_id": "0eca2c06-9e3f-417f-a266-15885d0f3864",
-		"name": "DevBlog",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+		"_postman_id": "45bcbed3-d240-44ec-9437-ee9c272831cf",
+		"name": "DevBlog - WebAPI",
+		"description": "This documentation prepared for requests in DevBlog WebAPI Project. This documentation will helped to send a request each endpoint.\n\nBefore send request some endpoint, you need to a bearer authentication token. For this create a new user and login with that. Login endpoint return a token.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7529637"
 	},
 	"item": [
 		{
@@ -51,7 +53,8 @@
 								"authors",
 								"1"
 							]
-						}
+						},
+						"description": "**Don't forget to set a postId in url!**"
 					},
 					"response": []
 				},
@@ -110,7 +113,8 @@
 								"authors",
 								"1"
 							]
-						}
+						},
+						"description": "**Don't forget to set a postId in url!**"
 					},
 					"response": []
 				},
@@ -161,7 +165,8 @@
 								"authors",
 								"1"
 							]
-						}
+						},
+						"description": "**Don't forget to set a postId in url!**"
 					},
 					"response": []
 				}
@@ -227,7 +232,8 @@
 								"categories",
 								"1"
 							]
-						}
+						},
+						"description": "**Don't forget to set a postId in url!**"
 					},
 					"response": []
 				},
@@ -286,7 +292,8 @@
 								"categories",
 								"1"
 							]
-						}
+						},
+						"description": "**Don't forget to set a postId in url!**"
 					},
 					"response": []
 				},
@@ -307,7 +314,8 @@
 								"categories",
 								"1"
 							]
-						}
+						},
+						"description": "**Don't forget to set a postId in url!**"
 					},
 					"response": []
 				}
@@ -316,27 +324,6 @@
 		{
 			"name": "Post",
 			"item": [
-				{
-					"name": "Get All Full",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://{{base_url}}:{{base_port}}/api/posts/full",
-							"protocol": "https",
-							"host": [
-								"{{base_url}}"
-							],
-							"port": "{{base_port}}",
-							"path": [
-								"api",
-								"posts",
-								"full"
-							]
-						}
-					},
-					"response": []
-				},
 				{
 					"name": "Get All",
 					"request": {
@@ -374,7 +361,8 @@
 								"posts",
 								"1"
 							]
-						}
+						},
+						"description": "**Don't forget to set a postId in url!**"
 					},
 					"response": []
 				},
@@ -433,7 +421,8 @@
 								"posts",
 								"1"
 							]
-						}
+						},
+						"description": "**Don't forget to set a postId in url!**"
 					},
 					"response": []
 				},
@@ -454,7 +443,41 @@
 								"posts",
 								"1"
 							]
-						}
+						},
+						"description": "**Don't forget to set a postId in url!**"
+					},
+					"response": []
+				},
+				{
+					"name": "Upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/posts/upload/58",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"posts",
+								"upload",
+								"58"
+							]
+						},
+						"description": "**Don't forget to set a postId in url!**"
 					},
 					"response": []
 				}
@@ -466,7 +489,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InpleW5lbC5rb3pha0BvdXRsb29rLmNvbSIsInByaW1hcnlzaWQiOiI2IiwibmJmIjoxNjUzOTQ0NjA4LCJleHAiOjE2NTQ1NDk0MDgsImlhdCI6MTY1Mzk0NDYwOH0.3o27WgAhsgMAzPPZhG-Qn4E8gAYWlCIA9psvmgjG-ek",
 				"type": "string"
 			}
 		]

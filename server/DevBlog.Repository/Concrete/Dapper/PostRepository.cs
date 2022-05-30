@@ -27,7 +27,7 @@ namespace DevBlog.Repository.Concrete.Dapper
         public async Task<List<PostFullDto>> GetAllFull()
         {
             var query =
-                "select p.Id, p.Title, p.Content, p.CreatedDate, p.Overview, p.ThumbnailImage, c.Id as cId, c.Title, c.Path, a.Id as aId, a.FullName, a.ProfileImage from posts as p inner join categories c on p.CategoryId = c.Id inner join authors a on p.AuthorId = a.Id order by p.Id desc;";
+                "select p.Id, p.Title, p.Content, p.CreatedDate, p.Overview, p.ThumbnailImage, c.Id as cId, c.Title, c.Path, a.Id as aId, a.FullName, a.ProfileImage, a.Email, a.Overview from posts as p inner join categories c on p.CategoryId = c.Id inner join authors a on p.AuthorId = a.Id order by p.Id desc;";
             var response = await _connection.QueryAsync<PostFullDto, CategoryDto, AuthorDto, PostFullDto>(query,
                 (postFullDto, category, author) =>
                 {

@@ -37,6 +37,7 @@ namespace DevBlog.WebAPI.Controllers
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Add(AuthorAddDto authorAddDto)
         {
