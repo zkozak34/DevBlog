@@ -76,7 +76,7 @@ namespace DevBlog.WebAPI.Controllers
         public async Task<IActionResult> Upload(int id)
         {
             var response = await _mediator.Send(new PostUploadCommand()
-                { Id = id, Path = "resource/post-images", File = Request.Form.Files});
+                { Id = id, Path = "resource\\post-images", File = Request.Form.Files});
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
     }

@@ -364,3 +364,4 @@ FodyWeavers.xsd
 /API/.idea/.idea.DevBlog/.idea
 
 API/DevBlog.WebAPI/appsettings.json
+wwwroot

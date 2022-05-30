@@ -33,16 +33,15 @@ namespace DevBlog.Service.Services.Commands.Posts.Upload
                 if (!Directory.Exists(uploadPath))
                     Directory.CreateDirectory(uploadPath);
                 
-                string fileName = request.File.GetFile("file").FileName;
+                var imageFile = request.File.GetFile("file");
                 Random r = new Random();
-                string newFileName = $"{r.NextInt64()}{Path.GetExtension(fileName)}";
+                string newFileName = $"{r.NextInt64()}{Path.GetExtension(imageFile.FileName)}";
                 string fullPath = Path.Combine(uploadPath, newFileName);
-                
+                if (File.Exists(Path.Combine(uploadPath, post.ThumbnailImage))) File.Delete(Path.Combine(uploadPath, post.ThumbnailImage));
+
                 await using var fileStream = new FileStream(fullPath, FileMode.Create, FileAccess.ReadWrite,
                     FileShare.ReadWrite, 1024 * 1024, useAsync: true);
-                var existsImage = Path.Combine(uploadPath, post.ThumbnailImage);
-                if(File.Exists(existsImage)) File.Delete(Path.Combine(uploadPath, post.ThumbnailImage));
-                await fileStream.CopyToAsync(fileStream);
+                await imageFile.CopyToAsync(fileStream);
                 await fileStream.FlushAsync();
                 bool updatePostImageInDb = await _postRepository.Update(request.Id, new PostUpdateDto()
                 {
@@ -53,12 +52,12 @@ namespace DevBlog.Service.Services.Commands.Posts.Upload
                     CategoryId = post.CategoryId,
                     Content = post.Content
                 });
-                if(!updatePostImageInDb) return ResponseDto<bool>.Fail("Image could not write on database", 500);
+                if(!updatePostImageInDb) return ResponseDto<bool>.Fail("Image could not write on database.", 500);
                 return ResponseDto<bool>.Success(200);
             }
             catch (Exception e)
             {
-                return ResponseDto<bool>.Fail(500);
+                return ResponseDto<bool>.Fail( "Image could not save on local storage.",500);
             }
         }
     }
