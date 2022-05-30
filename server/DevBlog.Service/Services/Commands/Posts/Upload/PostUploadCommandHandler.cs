@@ -52,7 +52,7 @@ namespace DevBlog.Service.Services.Commands.Posts.Upload
                     CategoryId = post.CategoryId,
                     Content = post.Content
                 });
-                if(!updatePostImageInDb) return ResponseDto<bool>.Fail("Image could not write on database.", 500);
+                if(!updatePostImageInDb) return ResponseDto<bool>.Fail(500);
                 return ResponseDto<bool>.Success(200);
             }
             catch (Exception e)
