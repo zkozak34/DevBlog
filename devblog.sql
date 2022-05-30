@@ -15,7 +15,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
 -- Database: `devblog`
@@ -29,14 +29,14 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `authors` (
   `Id` int NOT NULL,
-  `FullName` varchar(155) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
-  `Email` varchar(155) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
-  `Password` varchar(80) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
-  `ProfileImage` varchar(155) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
-  `Overview` text CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `FullName` varchar(155) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `Email` varchar(155) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `Password` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `ProfileImage` varchar(155) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `Overview` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UpdatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `authors`
@@ -55,9 +55,9 @@ CREATE TABLE `categories` (
   `Id` int NOT NULL,
   `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UpdatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Title` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
-  `Path` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `Title` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `Path` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `categories`
@@ -75,15 +75,15 @@ INSERT INTO `categories` (`Id`, `CreatedDate`, `UpdatedDate`, `Title`, `Path`) V
 
 CREATE TABLE `posts` (
   `Id` int NOT NULL,
-  `Title` varchar(150) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
-  `Content` text CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
-  `Overview` varchar(250) CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
-  `ThumbnailImage` mediumtext CHARACTER SET utf8mb3 COLLATE utf8_general_ci NOT NULL,
+  `Title` varchar(150) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `Content` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `Overview` varchar(250) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `ThumbnailImage` mediumtext CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
   `AuthorId` int DEFAULT NULL,
   `CategoryId` int DEFAULT NULL,
   `CreatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `UpdatedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 --
 -- Dumping data for table `posts`
