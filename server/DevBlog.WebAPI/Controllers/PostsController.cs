@@ -4,7 +4,6 @@ using DevBlog.Service.Services.Commands.Posts.Delete;
 using DevBlog.Service.Services.Commands.Posts.Update;
 using DevBlog.Service.Services.Commands.Posts.Upload;
 using DevBlog.Service.Services.Queries.Posts.GetAll;
-using DevBlog.Service.Services.Queries.Posts.GetAllFull;
 using DevBlog.Service.Services.Queries.Posts.GetById;
 using DevBlog.WebAPI.Filters;
 using MediatR;
@@ -31,14 +30,6 @@ namespace DevBlog.WebAPI.Controllers
         public async Task<IActionResult> GetAll()
         {
             var response = await _mediator.Send(new PostGetAllQuery());
-            return new ObjectResult(response) { StatusCode = response.StatusCode };
-        }
-
-        [AllowAnonymous]
-        [HttpGet("full")]
-        public async Task<IActionResult> GetAllFull()
-        {
-            var response = await _mediator.Send(new PostGetAllFullQuery());
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
