@@ -22,13 +22,11 @@ export default {
     fetchList({ commit, dispatch }) {
       commit("setIsLoaded", false);
       appAxios
-        .get("posts/full")
+        .get("posts")
         .then(({ data }) => {
-          if (data.statusCode === 200 && data.data.length > 0) {
-            commit("setList", data.data);
-            commit("setIsLoaded", true);
-            dispatch("loadApp", "", { root: true });
-          }
+          commit("setList", data.data);
+          commit("setIsLoaded", true);
+          dispatch("loadApp", "", { root: true });
         })
         .catch((e) => console.error(e));
     },

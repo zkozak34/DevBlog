@@ -26,9 +26,10 @@ namespace DevBlog.Service.Services.Queries.Posts.GetAll
                 string imagePath = Path.Combine(_webHostEnvironment.WebRootPath,"resource\\post-images", post.ThumbnailImage);
                 post.ThumbnailImage = Convert.ToBase64String(await File.ReadAllBytesAsync(imagePath));
             }
-            if (responseFromDb.Count < 1)
-                return ResponseDto<List<PostFullDto>>.Fail(500);
-            return ResponseDto<List<PostFullDto>>.Success(responseFromDb, 200);
+
+            if (responseFromDb.Count >= 1)
+                return ResponseDto<List<PostFullDto>>.Success(responseFromDb, 200);
+            return ResponseDto<List<PostFullDto>>.Success(204);
         }
     }
 }

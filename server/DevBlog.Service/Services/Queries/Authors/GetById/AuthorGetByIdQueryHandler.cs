@@ -19,7 +19,7 @@ namespace DevBlog.Service.Services.Queries.Authors.GetById
             var responseFromDb = await _authorRepository.GetById(request.Id);
             if (responseFromDb.FullName != null)
                 return ResponseDto<AuthorDto>.Success(responseFromDb, 200);
-            return ResponseDto<AuthorDto>.Fail(500);
+            return ResponseDto<AuthorDto>.Success(204);
         }
     }
 }

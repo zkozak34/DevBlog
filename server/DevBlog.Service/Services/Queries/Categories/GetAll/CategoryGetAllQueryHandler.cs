@@ -19,7 +19,7 @@ namespace DevBlog.Service.Services.Queries.Categories.GetAll
             var responseFromDb = await _categoryRepository.GetAll();
             if (responseFromDb.Count > 0)
                 return ResponseDto<List<Category>>.Success(responseFromDb, 200);
-            return ResponseDto<List<Category>>.Fail(500);
+            return ResponseDto<List<Category>>.Success(204);
         }
     }
 }

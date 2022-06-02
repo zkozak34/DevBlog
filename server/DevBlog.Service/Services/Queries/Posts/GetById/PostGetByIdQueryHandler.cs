@@ -18,7 +18,7 @@ namespace DevBlog.Service.Services.Queries.Posts.GetById
         {
             var responseFromDatabase = await _postRepository.GetById(request.Id);
             if (responseFromDatabase == null)
-                return ResponseDto<Post>.Fail(500);
+                return ResponseDto<Post>.Success(204);
             return ResponseDto<Post>.Success(responseFromDatabase, 200);
         }
     }

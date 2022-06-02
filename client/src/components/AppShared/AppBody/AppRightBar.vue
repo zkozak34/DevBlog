@@ -24,7 +24,8 @@
       <div class="card-body p-0">
         <div class="list-group">
           <a href="#" class="list-group-item d-flex justify-content-between" v-for="category in categoryList" :key="category.id">
-            {{ category.title }} <span class="badge bg-primary"> {{ postList.filter((p) => p.category.path === category.path).length }} </span></a
+            {{ category.title }}
+            <span class="badge bg-primary"> {{ this.postList?.filter((p) => p.category.path === category.path).length ?? 0 }} </span></a
           >
         </div>
       </div>

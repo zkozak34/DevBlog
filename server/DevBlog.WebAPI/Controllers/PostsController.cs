@@ -30,7 +30,9 @@ namespace DevBlog.WebAPI.Controllers
         public async Task<IActionResult> GetAll()
         {
             var response = await _mediator.Send(new PostGetAllQuery());
-            return new ObjectResult(response) { StatusCode = response.StatusCode };
+            if (response.StatusCode != 204)
+                return new ObjectResult(response) { StatusCode = response.StatusCode };
+            return new NoContentResult();
         }
 
         [AllowAnonymous]
@@ -38,7 +40,9 @@ namespace DevBlog.WebAPI.Controllers
         public async Task<IActionResult> GetById(int id)
         {
             var response = await _mediator.Send(new PostGetByIdQuery() { Id = id });
-            return new ObjectResult(response) { StatusCode = response.StatusCode };
+            if (response.StatusCode != 204)
+                return new ObjectResult(response) { StatusCode = response.StatusCode };
+            return new NoContentResult();
         }
 
         [HttpPost]

@@ -19,7 +19,7 @@ namespace DevBlog.Service.Services.Queries.Authors.GetAll
             var responseFromDb = await _authorRepository.GetAll();
             if (responseFromDb.Count > 0)
                 return ResponseDto<List<AuthorDto>>.Success(responseFromDb, 200);
-            return ResponseDto<List<AuthorDto>>.Fail(500);
+            return ResponseDto<List<AuthorDto>>.Success(204);
         }
     }
 }

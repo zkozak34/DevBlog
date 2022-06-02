@@ -27,14 +27,18 @@ namespace DevBlog.WebAPI.Controllers
         public async Task<IActionResult> GetAll()
         {
             var response = await _mediator.Send(new AuthorGetAllQuery());
-            return new ObjectResult(response) { StatusCode = response.StatusCode };
+            if (response.StatusCode != 204)
+                return new ObjectResult(response) { StatusCode = response.StatusCode };
+            return new NoContentResult();
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var response = await _mediator.Send(new AuthorGetByIdQuery() { Id = id });
-            return new ObjectResult(response) { StatusCode = response.StatusCode };
+            if (response.StatusCode != 204)
+                return new ObjectResult(response) { StatusCode = response.StatusCode };
+            return new NoContentResult();
         }
 
         [AllowAnonymous]

@@ -19,7 +19,7 @@ namespace DevBlog.Service.Services.Queries.Categories.GetById
             var responseFromDb = await _categoryRepository.GetById(request.Id);
             if (responseFromDb != null)
                 return ResponseDto<Category>.Success(responseFromDb, 200);
-            return ResponseDto<Category>.Fail(500);
+            return ResponseDto<Category>.Success(204);
         }
     }
 }
