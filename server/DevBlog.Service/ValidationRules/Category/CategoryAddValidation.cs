@@ -1,9 +1,9 @@
-﻿using DevBlog.Entities.Dtos.Category;
+﻿using DevBlog.Service.Services.Commands.Categories.Add;
 using FluentValidation;
 
 namespace DevBlog.Service.ValidationRules.Category
 {
-    public class CategoryAddValidation : AbstractValidator<CategoryAddDto>
+    public class CategoryAddValidation : AbstractValidator<CategoryAddCommand>
     {
         public CategoryAddValidation()
         {

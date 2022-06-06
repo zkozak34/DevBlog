@@ -5,6 +5,6 @@ namespace DevBlog.Service.Services.Commands.Posts.Delete
 {
     public class PostDeleteCommand : IRequest<ResponseDto<NoContent>>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

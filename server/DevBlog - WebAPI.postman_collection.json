@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "45bcbed3-d240-44ec-9437-ee9c272831cf",
+		"_postman_id": "1b2f0c75-29ba-43ce-9e99-4b9d749860c3",
 		"name": "DevBlog - WebAPI",
 		"description": "This documentation prepared for requests in DevBlog WebAPI Project. This documentation will helped to send a request each endpoint.\n\nBefore send request some endpoint, you need to a bearer authentication token. For this create a new user and login with that. Login endpoint return a token.",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "7529637"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
@@ -94,7 +93,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"fullName\": \"string\",\r\n  \"email\": \"string\",\r\n  \"profileImage\": \"string\",\r\n  \"overview\": \"string\"\r\n}",
+							"raw": "{\r\n    \"id\": \"1\",\r\n  \"fullName\": \"Zeynel KOZAK\",\r\n  \"email\": \"zkozak3334@gmail.com\",\r\n  \"profileImage\": \"string\",\r\n  \"overview\": \"string\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -102,7 +101,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{base_url}}:{{base_port}}/api/authors/1",
+							"raw": "https://{{base_url}}:{{base_port}}/api/authors",
 							"protocol": "https",
 							"host": [
 								"{{base_url}}"
@@ -110,8 +109,7 @@
 							"port": "{{base_port}}",
 							"path": [
 								"api",
-								"authors",
-								"1"
+								"authors"
 							]
 						},
 						"description": "**Don't forget to set a postId in url!**"
@@ -244,7 +242,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"title\": \"string\"\r\n}",
+							"raw": "{\r\n  \"title\": \"string\",\r\n  \"path\": \"string\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -273,7 +271,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"title\": \"string\"\r\n}",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"title\": \"string\",\r\n    \"path\": \"string\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -281,7 +279,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{base_url}}:{{base_port}}/api/categories/1",
+							"raw": "https://{{base_url}}:{{base_port}}/api/categories",
 							"protocol": "https",
 							"host": [
 								"{{base_url}}"
@@ -289,8 +287,7 @@
 							"port": "{{base_port}}",
 							"path": [
 								"api",
-								"categories",
-								"1"
+								"categories"
 							]
 						},
 						"description": "**Don't forget to set a postId in url!**"
@@ -402,7 +399,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"title\": \"string\",\r\n  \"content\": \"string\",\r\n  \"thumbnailImage\": \"string\",\r\n  \"authorId\": 0,\r\n  \"categoryId\": 0\r\n}",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"title\": \"string\",\r\n    \"content\": \"strdsdsing\",\r\n    \"overview\": \"string\",\r\n    \"thumbnailImage\": \"string\",\r\n    \"author\": null,\r\n    \"category\": null\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -410,7 +407,7 @@
 							}
 						},
 						"url": {
-							"raw": "https://{{base_url}}:{{base_port}}/api/posts/1",
+							"raw": "https://{{base_url}}:{{base_port}}/api/posts",
 							"protocol": "https",
 							"host": [
 								"{{base_url}}"
@@ -418,8 +415,7 @@
 							"port": "{{base_port}}",
 							"path": [
 								"api",
-								"posts",
-								"1"
+								"posts"
 							]
 						},
 						"description": "**Don't forget to set a postId in url!**"
@@ -489,7 +485,7 @@
 		"bearer": [
 			{
 				"key": "token",
-				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InpleW5lbC5rb3pha0BvdXRsb29rLmNvbSIsInByaW1hcnlzaWQiOiI2IiwibmJmIjoxNjUzOTQ0NjA4LCJleHAiOjE2NTQ1NDk0MDgsImlhdCI6MTY1Mzk0NDYwOH0.3o27WgAhsgMAzPPZhG-Qn4E8gAYWlCIA9psvmgjG-ek",
+				"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjA4ZGE0NzhjLWJkYjgtNDkyNy04YTk1LTI5Y2FmYzZkZGMzNyIsIkVtYWlsIjoiemV5bmVsLmtvemFrQG91dGxvb2suY29tIiwiRnVsbE5hbWUiOiJ6ZXluZWwga296YWsiLCJuYmYiOjE2NTQ1MTAxMTcsImV4cCI6MTY1NTExNDkxNywiaWF0IjoxNjU0NTEwMTE3fQ.JbnWvMQrqZiKjRyl8GDs06rjkOxuy8hG1n_v3t6UrFc",
 				"type": "string"
 			}
 		]

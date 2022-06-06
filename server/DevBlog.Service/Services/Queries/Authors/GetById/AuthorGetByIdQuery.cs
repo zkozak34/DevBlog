@@ -6,6 +6,6 @@ namespace DevBlog.Service.Services.Queries.Authors.GetById
 {
     public class AuthorGetByIdQuery : IRequest<ResponseDto<AuthorDto>>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

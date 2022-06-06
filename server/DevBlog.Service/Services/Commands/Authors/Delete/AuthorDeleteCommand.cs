@@ -5,6 +5,6 @@ namespace DevBlog.Service.Services.Commands.Authors.Delete
 {
     public class AuthorDeleteCommand : IRequest<ResponseDto<NoContent>>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

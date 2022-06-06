@@ -1,5 +1,4 @@
-﻿using DevBlog.Entities.Dtos.Post;
-using DevBlog.Service.Services.Commands.Posts.Add;
+﻿using DevBlog.Service.Services.Commands.Posts.Add;
 using DevBlog.Service.Services.Commands.Posts.Delete;
 using DevBlog.Service.Services.Commands.Posts.Update;
 using DevBlog.Service.Services.Commands.Posts.Upload;
@@ -30,33 +29,58 @@ namespace DevBlog.WebAPI.Controllers
         public async Task<IActionResult> GetAll()
         {
             var response = await _mediator.Send(new PostGetAllQuery());
+            if (response.StatusCode == 204)
+                return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
         [AllowAnonymous]
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             var response = await _mediator.Send(new PostGetByIdQuery() { Id = id });
+            if (response.StatusCode == 204)
+                return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(PostAddDto postAddDto)
+        public async Task<IActionResult> Add(PostAddCommand postAddDto)
         {
-            var response = await _mediator.Send(new PostAddCommand() { PostAddDto = postAddDto });
+            var response = await _mediator.Send(new PostAddCommand()
+            {
+                Overview = postAddDto.Overview,
+                CategoryId = postAddDto.CategoryId,
+                AuthorId = postAddDto.AuthorId,
+                Content = postAddDto.Content,
+                ThumbnailImage = postAddDto.ThumbnailImage,
+                Title = postAddDto.Title
+            });
+            if (response.StatusCode == 204)
+                return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, PostUpdateDto postUpdateDto)
+        [HttpPut]
+        public async Task<IActionResult> Update(PostUpdateCommand postUpdateDto)
         {
-            var response = await _mediator.Send(new PostUpdateCommand() { PostUpdateDto = postUpdateDto, Id = id });
+            var response = await _mediator.Send(new PostUpdateCommand()
+            {
+                Id = postUpdateDto.Id,
+                Overview = postUpdateDto.Overview,
+                CategoryId = postUpdateDto.CategoryId,
+                AuthorId = postUpdateDto.AuthorId,
+                Content = postUpdateDto.Content,
+                ThumbnailImage = postUpdateDto.ThumbnailImage,
+                Title = postUpdateDto.Title
+            });
+            if (response.StatusCode == 204)
+                return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var response = await _mediator.Send(new PostDeleteCommand() { Id = id });
             return new ObjectResult(response) { StatusCode = response.StatusCode };
@@ -64,10 +88,9 @@ namespace DevBlog.WebAPI.Controllers
 
         [FileExtensionControlFilter]
         [HttpPost("[action]/{id}")]
-        public async Task<IActionResult> Upload(int id)
+        public async Task<IActionResult> Upload(Guid id)
         {
-            var response = await _mediator.Send(new PostUploadCommand()
-                { Id = id, Path = "resource\\post-images", File = Request.Form.Files});
+            var response = await _mediator.Send(new PostUploadCommand { PostId = id, Path = "resource\\post-images", File = Request.Form.Files.GetFile("file") });
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
     }

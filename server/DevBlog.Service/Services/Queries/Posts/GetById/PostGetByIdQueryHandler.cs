@@ -1,25 +1,29 @@
-﻿using DevBlog.Core.Dtos.ResponseDto;
-using DevBlog.Entities.Concrete;
-using DevBlog.Repository.Abstract;
+﻿using AutoMapper;
+using DevBlog.Core.Dtos.ResponseDto;
+using DevBlog.Entities.Dtos.Post;
+using DevBlog.Repository.Abstract.Post;
 using MediatR;
+using System.Net;
 
 namespace DevBlog.Service.Services.Queries.Posts.GetById
 {
-    public class PostGetByIdQueryHandler : IRequestHandler<PostGetByIdQuery, ResponseDto<Post>>
+    public class PostGetByIdQueryHandler : IRequestHandler<PostGetByIdQuery, ResponseDto<PostDto>>
     {
-        private readonly IPostRepository _postRepository;
+        private readonly IPostReadRepository _postReadRepository;
+        private readonly IMapper _mapper;
 
-        public PostGetByIdQueryHandler(IPostRepository postRepository)
+        public PostGetByIdQueryHandler(IPostReadRepository authorReadRepository, IMapper mapper)
         {
-            _postRepository = postRepository;
+            _postReadRepository = authorReadRepository;
+            _mapper = mapper;
         }
 
-        public async Task<ResponseDto<Post>> Handle(PostGetByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<PostDto>> Handle(PostGetByIdQuery request, CancellationToken cancellationToken)
         {
-            var responseFromDatabase = await _postRepository.GetById(request.Id);
-            if (responseFromDatabase == null)
-                return ResponseDto<Post>.Fail(500);
-            return ResponseDto<Post>.Success(responseFromDatabase, 200);
+            var responseFromDb = await _postReadRepository.GetByIdAsync(request.Id, false);
+            if (responseFromDb != null)
+                return ResponseDto<PostDto>.Success(_mapper.Map<PostDto>(responseFromDb), 200);
+            return ResponseDto<PostDto>.Fail((int)HttpStatusCode.BadRequest);
         }
     }
 }

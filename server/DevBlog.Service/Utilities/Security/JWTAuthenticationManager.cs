@@ -7,7 +7,7 @@ namespace DevBlog.Service.Utilities.Security
 {
     public class JWTAuthenticationManager : IJWTAuthenticationManager
     {
-        public string Authenticate(int id, string email)
+        public string Authenticate(Guid id, string email, string fullName)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes(ServiceRegistration.SaltKey); // secret token key
@@ -15,8 +15,9 @@ namespace DevBlog.Service.Utilities.Security
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Email, email),
-                    new Claim(ClaimTypes.PrimarySid, id.ToString()),
+                    new Claim("Id", id.ToString()),
+                    new Claim("Email", email),
+                    new Claim("FullName", fullName),
                 }),
                 Expires = DateTime.Now.AddDays(7),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(tokenKey), SecurityAlgorithms.HmacSha256Signature)

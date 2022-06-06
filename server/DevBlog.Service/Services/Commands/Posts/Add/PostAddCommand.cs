@@ -1,11 +1,15 @@
 ﻿using DevBlog.Core.Dtos.ResponseDto;
-using DevBlog.Entities.Dtos.Post;
 using MediatR;
 
 namespace DevBlog.Service.Services.Commands.Posts.Add
 {
     public class PostAddCommand : IRequest<ResponseDto<NoContent>>
     {
-        public PostAddDto PostAddDto { get; set; }
+        public string Title { get; set; }
+        public string Content { get; set; }
+        public string Overview { get; set; }
+        public string ThumbnailImage { get; set; }
+        public int AuthorId { get; set; }
+        public int CategoryId { get; set; }
     }
 }

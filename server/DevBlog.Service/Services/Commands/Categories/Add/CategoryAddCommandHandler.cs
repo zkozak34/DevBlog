@@ -1,24 +1,27 @@
 ﻿using DevBlog.Core.Dtos.ResponseDto;
-using DevBlog.Repository.Abstract;
+using DevBlog.Entities.Concrete;
+using DevBlog.Repository.Abstract.Category;
 using MediatR;
+using System.Net;
 
 namespace DevBlog.Service.Services.Commands.Categories.Add
 {
     public class CategoryAddCommandHandler : IRequestHandler<CategoryAddCommand, ResponseDto<NoContent>>
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryWriteRepository _categoryWriteRepository;
 
-        public CategoryAddCommandHandler(ICategoryRepository categoryRepository)
+        public CategoryAddCommandHandler(ICategoryWriteRepository categoryWriteRepository)
         {
-            _categoryRepository = categoryRepository;
+            _categoryWriteRepository = categoryWriteRepository;
         }
 
         public async Task<ResponseDto<NoContent>> Handle(CategoryAddCommand request, CancellationToken cancellationToken)
         {
-            var responseFromDb = await _categoryRepository.Add(request.CategoryAddDto);
+            var responseFromDb = await _categoryWriteRepository.AddAsync(new Category() { Title = request.Title, Path = request.Path });
+            await _categoryWriteRepository.SaveAsync();
             if (responseFromDb)
                 return ResponseDto<NoContent>.Success(200);
-            return ResponseDto<NoContent>.Fail(500);
+            return ResponseDto<NoContent>.Fail((int)HttpStatusCode.BadRequest);
         }
     }
 }

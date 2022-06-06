@@ -1,18 +1,38 @@
-﻿using MediatR;
+﻿using DevBlog.Repository.Abstract.Author;
+using DevBlog.Repository.Abstract.Category;
+using DevBlog.Repository.Abstract.Post;
+using DevBlog.Repository.Repositories.Author;
+using DevBlog.Repository.Repositories.Category;
+using DevBlog.Repository.Repositories.Post;
+using DevBlog.Service.Utilities.Security;
+using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
+using DevBlog.Service.Utilities.Storage;
+using DevBlog.Service.Utilities.Storage.Abstraction;
 
 namespace DevBlog.Service
 {
     public static class ServiceRegistration
     {
         public static string SaltKey;
+
         public static void AddBusinessService(this IServiceCollection service, string salt)
         {
-            service.AddMediatR(Assembly.GetExecutingAssembly());
+            service.AddMediatR(typeof(ServiceRegistration));
+            service.AddAutoMapper(Assembly.GetAssembly(typeof(ServiceRegistration)));
+            service.AddScoped<IPostReadRepository, PostReadRepository>();
+            service.AddScoped<IPostWriteRepository, PostWriteRepository>();
+            service.AddScoped<IAuthorReadRepository, AuthorReadRepository>();
+            service.AddScoped<IAuthorWriteRepository, AuthorWriteRepository>();
+            service.AddScoped<ICategoryReadRepository, CategoryReadRepository>();
+            service.AddScoped<ICategoryWriteRepository, CategoryWriteRepository>();
+            service.AddScoped<IJWTAuthenticationManager, JWTAuthenticationManager>();
+
+            service.AddScoped<IStorageService, StorageService>();
 
             SaltKey = salt;
             service.AddAuthentication(x =>
@@ -31,6 +51,11 @@ namespace DevBlog.Service
                     ValidateAudience = false
                 };
             });
+        }
+
+        public static void AddStorage<T>(this IServiceCollection service) where T : class, IStorage
+        {
+            service.AddScoped<IStorage, T>();
         }
     }
 }

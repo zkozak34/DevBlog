@@ -1,9 +1,10 @@
 ﻿using DevBlog.Entities.Dtos.Post;
+using DevBlog.Service.Services.Commands.Posts.Add;
 using FluentValidation;
 
 namespace DevBlog.Service.ValidationRules.Post
 {
-    public class PostAddValidation : AbstractValidator<PostAddDto>
+    public class PostAddValidation : AbstractValidator<PostAddCommand>
     {
         public PostAddValidation()
         {

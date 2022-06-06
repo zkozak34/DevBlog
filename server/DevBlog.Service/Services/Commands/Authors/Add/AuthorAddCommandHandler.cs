@@ -1,34 +1,35 @@
 ﻿using DevBlog.Core.Dtos.ResponseDto;
 using DevBlog.Core.Utilities.Hashing;
-using DevBlog.Entities.Dtos.Author;
-using DevBlog.Repository.Abstract;
+using DevBlog.Entities.Concrete;
+using DevBlog.Repository.Abstract.Author;
 using MediatR;
+using System.Net;
 
 namespace DevBlog.Service.Services.Commands.Authors.Add
 {
     public class AuthorAddCommandHandler : IRequestHandler<AuthorAddCommand, ResponseDto<NoContent>>
     {
-        private readonly IAuthorRepository _authorRepository;
+        private readonly IAuthorWriteRepository _authorWriteRepository;
 
-        public AuthorAddCommandHandler(IAuthorRepository authorRepository)
+        public AuthorAddCommandHandler(IAuthorWriteRepository authorWriteRepository)
         {
-            _authorRepository = authorRepository;
+            _authorWriteRepository = authorWriteRepository;
         }
 
         public async Task<ResponseDto<NoContent>> Handle(AuthorAddCommand request, CancellationToken cancellationToken)
         {
-            var responseFromDb = await _authorRepository.Add(new AuthorAddDto()
+            var responseFromDb = await _authorWriteRepository.AddAsync(new Author()
             {
-                FullName = request.AddCommand.FullName,
-                Email = request.AddCommand.Email,
-                Overview = request.AddCommand.Overview,
-                Password = Security.Encrypt(request.AddCommand.Password, ServiceRegistration.SaltKey),
-                ProfileImage = request.AddCommand.ProfileImage,
-
+                FullName = request.FullName,
+                Email = request.Email,
+                Password = Security.Encrypt(request.Password, ServiceRegistration.SaltKey),
+                ProfileImage = request.ProfileImage,
+                Overview = request.Overview
             });
+            await _authorWriteRepository.SaveAsync();
             if (responseFromDb)
                 return ResponseDto<NoContent>.Success(200);
-            return ResponseDto<NoContent>.Fail(500);
+            return ResponseDto<NoContent>.Fail((int)HttpStatusCode.BadRequest);
         }
     }
 }

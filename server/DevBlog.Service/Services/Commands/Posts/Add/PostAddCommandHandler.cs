@@ -1,24 +1,34 @@
 ﻿using DevBlog.Core.Dtos.ResponseDto;
-using DevBlog.Repository.Abstract;
+using DevBlog.Entities.Concrete;
+using DevBlog.Repository.Abstract.Post;
 using MediatR;
+using System.Net;
 
 namespace DevBlog.Service.Services.Commands.Posts.Add
 {
-    internal class PostAddCommandHandler : IRequestHandler<PostAddCommand, ResponseDto<NoContent>>
+    public class PostAddCommandHandler : IRequestHandler<PostAddCommand, ResponseDto<NoContent>>
     {
-        private readonly IPostRepository _postRepository;
+        private readonly IPostWriteRepository _postWriteRepository;
 
-        public PostAddCommandHandler(IPostRepository postRepository)
+        public PostAddCommandHandler(IPostWriteRepository authorWriteRepository)
         {
-            _postRepository = postRepository;
+            _postWriteRepository = authorWriteRepository;
         }
-
         public async Task<ResponseDto<NoContent>> Handle(PostAddCommand request, CancellationToken cancellationToken)
         {
-            var responseFromDb = await _postRepository.Add(request.PostAddDto);
+            var responseFromDb = await _postWriteRepository.AddAsync(new Post()
+            {
+                Overview = request.Overview,
+                AuthorId = request.AuthorId,
+                CategoryId = request.CategoryId,
+                Content = request.Content,
+                ThumbnailImage = request.ThumbnailImage,
+                Title = request.Title,
+            });
+            await _postWriteRepository.SaveAsync();
             if (responseFromDb)
                 return ResponseDto<NoContent>.Success(200);
-            return ResponseDto<NoContent>.Fail(500);
+            return ResponseDto<NoContent>.Fail((int)HttpStatusCode.BadRequest);
         }
     }
 }

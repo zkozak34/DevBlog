@@ -363,6 +363,8 @@ MigrationBackup/
 FodyWeavers.xsd
 /API/.idea/.idea.DevBlog/.idea
 
-API/DevBlog.WebAPI/appsettings.json
+appsettings.json
 wwwroot
 TODOList.txt
+[Mm]igrations
+.config

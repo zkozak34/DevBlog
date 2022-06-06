@@ -2,6 +2,6 @@
 {
     public interface IJWTAuthenticationManager
     {
-        string Authenticate(int id, string email);
+        string Authenticate(Guid id, string email, string fullName);
     }
 }

@@ -1,25 +1,28 @@
-﻿using DevBlog.Core.Dtos.ResponseDto;
+﻿using AutoMapper;
+using DevBlog.Core.Dtos.ResponseDto;
 using DevBlog.Entities.Dtos.Author;
-using DevBlog.Repository.Abstract;
+using DevBlog.Repository.Abstract.Author;
 using MediatR;
 
 namespace DevBlog.Service.Services.Queries.Authors.GetAll
 {
-    public class AuthorGetAllQueryHandler : IRequestHandler<AuthorGetAllQuery, ResponseDto<List<AuthorDto>>>
+    public class AuthorGetAllQueryHandler : IRequestHandler<AuthorGetAllQuery, ResponseDto<IEnumerable<AuthorDto>>>
     {
-        private readonly IAuthorRepository _authorRepository;
+        private readonly IAuthorReadRepository _authorReadRepository;
+        private readonly IMapper _mapper;
 
-        public AuthorGetAllQueryHandler(IAuthorRepository authorRepository)
+        public AuthorGetAllQueryHandler(IAuthorReadRepository authorReadRepository, IMapper mapper)
         {
-            _authorRepository = authorRepository;
+            _authorReadRepository = authorReadRepository;
+            _mapper = mapper;
         }
 
-        public async Task<ResponseDto<List<AuthorDto>>> Handle(AuthorGetAllQuery request, CancellationToken cancellationToken)
+        public Task<ResponseDto<IEnumerable<AuthorDto>>> Handle(AuthorGetAllQuery request, CancellationToken cancellationToken)
         {
-            var responseFromDb = await _authorRepository.GetAll();
-            if (responseFromDb.Count > 0)
-                return ResponseDto<List<AuthorDto>>.Success(responseFromDb, 200);
-            return ResponseDto<List<AuthorDto>>.Fail(500);
+            var responseFromDb = _authorReadRepository.GetAll(false);
+            if (responseFromDb.Any())
+                return Task.FromResult(ResponseDto<IEnumerable<AuthorDto>>.Success(_mapper.Map<IEnumerable<AuthorDto>>(responseFromDb), 200));
+            return Task.FromResult(ResponseDto<IEnumerable<AuthorDto>>.Fail(204));
         }
     }
 }

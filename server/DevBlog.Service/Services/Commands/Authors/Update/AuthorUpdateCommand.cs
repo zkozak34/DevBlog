@@ -1,12 +1,14 @@
 ﻿using DevBlog.Core.Dtos.ResponseDto;
-using DevBlog.Entities.Dtos.Author;
 using MediatR;
 
 namespace DevBlog.Service.Services.Commands.Authors.Update
 {
     public class AuthorUpdateCommand : IRequest<ResponseDto<NoContent>>
     {
-        public int Id { get; set; }
-        public AuthorUpdateDto AuthorUpdateDto { get; set; }
+        public Guid Id { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public string ProfileImage { get; set; }
+        public string Overview { get; set; }
     }
 }

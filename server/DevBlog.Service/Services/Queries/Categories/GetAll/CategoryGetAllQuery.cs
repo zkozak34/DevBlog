@@ -1,10 +1,10 @@
 ﻿using DevBlog.Core.Dtos.ResponseDto;
-using DevBlog.Entities.Concrete;
+using DevBlog.Entities.Dtos.Category;
 using MediatR;
 
 namespace DevBlog.Service.Services.Queries.Categories.GetAll
 {
-    public class CategoryGetAllQuery : IRequest<ResponseDto<List<Category>>>
+    public class CategoryGetAllQuery : IRequest<ResponseDto<IEnumerable<CategoryDto>>>
     {
     }
 }

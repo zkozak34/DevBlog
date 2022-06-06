@@ -1,64 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net;
 using DevBlog.Core.Dtos.ResponseDto;
-using DevBlog.Entities.Dtos.Post;
-using DevBlog.Repository.Abstract;
+using DevBlog.Repository.Abstract.Post;
+using DevBlog.Service.Utilities.Storage.Abstraction;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
 
 namespace DevBlog.Service.Services.Commands.Posts.Upload
 {
-    public class PostUploadCommandHandler : IRequestHandler<PostUploadCommand, ResponseDto<bool>>
+    public class PostUploadCommandHandler : IRequestHandler<PostUploadCommand, ResponseDto<string>>
     {
-        private readonly IPostRepository _postRepository;
         private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IStorageService _storageService;
+        private readonly IPostWriteRepository _postWriteRepository;
+        private readonly IPostReadRepository _postReadRepository;
 
-        public PostUploadCommandHandler(IPostRepository postRepository, IWebHostEnvironment webHostEnvironment)
+        public PostUploadCommandHandler(IWebHostEnvironment webHostEnvironment, IStorageService storageService, IPostWriteRepository postWriteRepository, IPostReadRepository postReadRepository)
         {
-            _postRepository = postRepository;
             _webHostEnvironment = webHostEnvironment;
+            _storageService = storageService;
+            _postWriteRepository = postWriteRepository;
+            _postReadRepository = postReadRepository;
         }
 
-        public async Task<ResponseDto<bool>> Handle(PostUploadCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<string>> Handle(PostUploadCommand request, CancellationToken cancellationToken)
         {
-            try
+            var post = await _postReadRepository.GetByIdAsync(request.PostId);
+            var newFileName = await _storageService.UploadAsync(request.Path, request.File, post.ThumbnailImage);
+            if (newFileName != null)
             {
-                var post = await _postRepository.GetById(request.Id);
-
-                string uploadPath = Path.Combine(_webHostEnvironment.WebRootPath, request.Path);
-                if (!Directory.Exists(uploadPath))
-                    Directory.CreateDirectory(uploadPath);
-                
-                var imageFile = request.File.GetFile("file");
-                Random r = new Random();
-                string newFileName = $"{r.NextInt64()}{Path.GetExtension(imageFile.FileName)}";
-                string fullPath = Path.Combine(uploadPath, newFileName);
-                if (File.Exists(Path.Combine(uploadPath, post.ThumbnailImage))) File.Delete(Path.Combine(uploadPath, post.ThumbnailImage));
-
-                await using var fileStream = new FileStream(fullPath, FileMode.Create, FileAccess.ReadWrite,
-                    FileShare.ReadWrite, 1024 * 1024, useAsync: true);
-                await imageFile.CopyToAsync(fileStream);
-                await fileStream.FlushAsync();
-                bool updatePostImageInDb = await _postRepository.Update(request.Id, new PostUpdateDto()
-                {
-                    Title = post.Title,
-                    Overview = post.Overview,
-                    ThumbnailImage = newFileName,
-                    AuthorId = post.AuthorId,
-                    CategoryId = post.CategoryId,
-                    Content = post.Content
-                });
-                if(!updatePostImageInDb) return ResponseDto<bool>.Fail(500);
-                return ResponseDto<bool>.Success(200);
+                post.ThumbnailImage = newFileName;
+                await _postWriteRepository.SaveAsync();
+                return ResponseDto<string>.Success(newFileName,200);
             }
-            catch (Exception e)
-            {
-                return ResponseDto<bool>.Fail( "Image could not save on local storage.",500);
-            }
+            return ResponseDto<string>.Fail((int)HttpStatusCode.BadRequest);
         }
     }
 }

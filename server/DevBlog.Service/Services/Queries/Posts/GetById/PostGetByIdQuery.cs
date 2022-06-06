@@ -1,11 +1,11 @@
 ﻿using DevBlog.Core.Dtos.ResponseDto;
-using DevBlog.Entities.Concrete;
+using DevBlog.Entities.Dtos.Post;
 using MediatR;
 
 namespace DevBlog.Service.Services.Queries.Posts.GetById
 {
-    public class PostGetByIdQuery : IRequest<ResponseDto<Post>>
+    public class PostGetByIdQuery : IRequest<ResponseDto<PostDto>>
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
     }
 }

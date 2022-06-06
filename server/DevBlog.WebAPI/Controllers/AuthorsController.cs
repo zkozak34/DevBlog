@@ -1,5 +1,4 @@
-﻿using DevBlog.Entities.Dtos.Author;
-using DevBlog.Service.Services.Commands.Authors.Add;
+﻿using DevBlog.Service.Services.Commands.Authors.Add;
 using DevBlog.Service.Services.Commands.Authors.Delete;
 using DevBlog.Service.Services.Commands.Authors.Update;
 using DevBlog.Service.Services.Queries.Authors.GetAll;
@@ -27,43 +26,69 @@ namespace DevBlog.WebAPI.Controllers
         public async Task<IActionResult> GetAll()
         {
             var response = await _mediator.Send(new AuthorGetAllQuery());
+            if (response.StatusCode == 204)
+                return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(int id)
+        public async Task<IActionResult> GetById(Guid id)
         {
             var response = await _mediator.Send(new AuthorGetByIdQuery() { Id = id });
+            if (response.StatusCode == 204)
+                return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Add(AuthorAddDto authorAddDto)
+        public async Task<IActionResult> Add(AuthorAddCommand authorAddDto)
         {
-            var response = await _mediator.Send(new AuthorAddCommand() { AddCommand = authorAddDto });
+            var response = await _mediator.Send(new AuthorAddCommand()
+            {
+                Email = authorAddDto.Email,
+                FullName = authorAddDto.FullName,
+                Overview = authorAddDto.Overview,
+                Password = authorAddDto.Password,
+                ProfileImage = authorAddDto.ProfileImage
+            });
+            if (response.StatusCode == 204)
+                return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, AuthorUpdateDto authorUpdateDto)
+        [HttpPut]
+        public async Task<IActionResult> Update(AuthorUpdateCommand authorUpdateDto)
         {
-            var response = await _mediator.Send(new AuthorUpdateCommand() { Id = id, AuthorUpdateDto = authorUpdateDto });
+            var response = await _mediator.Send(new AuthorUpdateCommand()
+            {
+                Id = authorUpdateDto.Id,
+                Email = authorUpdateDto.Email,
+                FullName = authorUpdateDto.FullName,
+                Overview = authorUpdateDto.Overview,
+                ProfileImage = authorUpdateDto.ProfileImage
+            });
+            if (response.StatusCode == 204)
+                return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var response = await _mediator.Send(new AuthorDeleteCommand() { Id = id });
+            if (response.StatusCode == 204)
+                return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
         [AllowAnonymous]
         [HttpPost("[action]")]
-        public async Task<IActionResult> Login([FromBody] AuthorLoginDto authorLoginDto)
+        public async Task<IActionResult> Login([FromBody] AuthorLoginQuery authorLoginDto)
         {
             var response = await _mediator.Send(new AuthorLoginQuery() { Email = authorLoginDto.Email, Password = authorLoginDto.Password });
+            if (response.StatusCode == 204)
+                return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
     }

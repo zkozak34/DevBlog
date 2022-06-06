@@ -1,9 +1,9 @@
-﻿using DevBlog.Entities.Dtos.Author;
+﻿using DevBlog.Service.Services.Commands.Authors.Update;
 using FluentValidation;
 
 namespace DevBlog.Service.ValidationRules.Authors
 {
-    public class AuthorUpdateValidation : AbstractValidator<AuthorUpdateDto>
+    public class AuthorUpdateValidation : AbstractValidator<AuthorUpdateCommand>
     {
         public AuthorUpdateValidation()
         {

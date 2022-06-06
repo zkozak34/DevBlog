@@ -1,24 +1,26 @@
 ﻿using DevBlog.Core.Dtos.ResponseDto;
-using DevBlog.Repository.Abstract;
+using DevBlog.Repository.Abstract.Category;
 using MediatR;
+using System.Net;
 
 namespace DevBlog.Service.Services.Commands.Categories.Delete
 {
     public class CategoryDeleteCommandHandler : IRequestHandler<CategoryDeleteCommand, ResponseDto<NoContent>>
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryWriteRepository _categoryWriteRepository;
 
-        public CategoryDeleteCommandHandler(ICategoryRepository categoryRepository)
+        public CategoryDeleteCommandHandler(ICategoryWriteRepository categoryWriteRepository)
         {
-            _categoryRepository = categoryRepository;
+            _categoryWriteRepository = categoryWriteRepository;
         }
 
         public async Task<ResponseDto<NoContent>> Handle(CategoryDeleteCommand request, CancellationToken cancellationToken)
         {
-            var responseFromDb = await _categoryRepository.Delete(request.Id);
+            var responseFromDb = await _categoryWriteRepository.Delete(request.Id);
+            await _categoryWriteRepository.SaveAsync();
             if (responseFromDb)
-                return ResponseDto<NoContent>.Success(200);
-            return ResponseDto<NoContent>.Fail(500);
+                return ResponseDto<NoContent>.Success(204);
+            return ResponseDto<NoContent>.Fail((int)HttpStatusCode.BadRequest);
         }
     }
 }

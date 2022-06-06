@@ -1,25 +1,29 @@
-﻿using DevBlog.Core.Dtos.ResponseDto;
-using DevBlog.Entities.Concrete;
-using DevBlog.Repository.Abstract;
+﻿using AutoMapper;
+using DevBlog.Core.Dtos.ResponseDto;
+using DevBlog.Entities.Dtos.Category;
+using DevBlog.Repository.Abstract.Category;
 using MediatR;
+using System.Net;
 
 namespace DevBlog.Service.Services.Queries.Categories.GetById
 {
-    internal class CategoryGetByIdQueryHandler : IRequestHandler<CategoryGetByIdQuery, ResponseDto<Category>>
+    public class CategoryGetByIdQueryHandler : IRequestHandler<CategoryGetByIdQuery, ResponseDto<CategoryDto>>
     {
-        private readonly ICategoryRepository _categoryRepository;
+        private readonly ICategoryReadRepository _categoryReadRepository;
+        private readonly IMapper _mapper;
 
-        public CategoryGetByIdQueryHandler(ICategoryRepository categoryRepository)
+        public CategoryGetByIdQueryHandler(ICategoryReadRepository categoryReadRepository, IMapper mapper)
         {
-            _categoryRepository = categoryRepository;
+            _categoryReadRepository = categoryReadRepository;
+            _mapper = mapper;
         }
 
-        public async Task<ResponseDto<Category>> Handle(CategoryGetByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<CategoryDto>> Handle(CategoryGetByIdQuery request, CancellationToken cancellationToken)
         {
-            var responseFromDb = await _categoryRepository.GetById(request.Id);
+            var responseFromDb = await _categoryReadRepository.GetByIdAsync(request.Id);
             if (responseFromDb != null)
-                return ResponseDto<Category>.Success(responseFromDb, 200);
-            return ResponseDto<Category>.Fail(500);
+                return ResponseDto<CategoryDto>.Success(_mapper.Map<CategoryDto>(responseFromDb), 200);
+            return ResponseDto<CategoryDto>.Fail((int)HttpStatusCode.BadRequest);
         }
     }
 }

@@ -1,0 +1,12 @@
+﻿using DevBlog.Repository.Abstract.Author;
+using DevBlog.Repository.Concrete.EntityFramework;
+
+namespace DevBlog.Repository.Repositories.Author
+{
+    public class AuthorWriteRepository : WriteRepository<Entities.Concrete.Author>, IAuthorWriteRepository
+    {
+        public AuthorWriteRepository(DevBlogDbContext context) : base(context)
+        {
+        }
+    }
+}
