@@ -9,14 +9,12 @@ using Microsoft.Extensions.FileProviders;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllers(opts => opts.Filters.Add(new ValidationFilter()))
     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining(typeof(DevBlog.Service.ServiceRegistration)));
 builder.Services.Configure<ApiBehaviorOptions>(option =>
 {
     option.SuppressModelStateInvalidFilter = true;
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -34,6 +32,7 @@ builder.Services.AddCors(options =>
     });
 });
 builder.Services.AddStorage<LocalStorage>();
+builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
 
 var fileProvider = new PhysicalFileProvider(Path.Combine(builder.Environment.WebRootPath, "resource"));
 var requestPath = "/images";
@@ -49,6 +48,31 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.Use(async (httpContext, next) =>
+{
+    httpContext.Response.Headers.Add("X-Frame-Options", "DENY");
+    httpContext.Response.Headers.Add("X-Xss-Protection", "1; mode=block");
+    httpContext.Response.Headers.Add("X-Content-Type-Options", "nosniff");
+    httpContext.Response.Headers.Add(
+        "Content-Security-Policy",
+        "default-src 'self'; " +
+        "img-src 'self' {your_awesome_url}; " +
+        "font-src 'self'; " +
+        "style-src 'self'; " +
+        "script-src 'self' 'nonce-none-of-your-business-man' " +
+        " 'nonce-none-of-your-business-man'; " +
+        "frame-src 'self';" +
+        "connect-src 'self';");
+    httpContext.Response.Headers.Add("Referrer-Policy", "no-referrer");
+    httpContext.Response.Headers.Add("Feature-Policy", "accelerometer 'none'; camera 'none';" +
+                                                       " geolocation 'none'; gyroscope 'none'; " +
+                                                       "magnetometer 'none'; microphone 'none'; " +
+                                                       "payment 'none'; usb 'none'"); 
+    await next();
+});
+
+app.UseHsts();
 
 app.UseHttpsRedirection();
 
