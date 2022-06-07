@@ -1,9 +1,9 @@
 ﻿using DevBlog.Core.Dtos.ResponseDto;
 using MediatR;
 
-namespace DevBlog.Service.Services.Queries.Authors.Login
+namespace DevBlog.Service.Services.Commands.Authors.Login
 {
-    public class AuthorLoginQuery : IRequest<ResponseDto<string>>
+    public class AuthorLoginCommand : IRequest<ResponseDto<string>>
     {
         public string Email { get; set; }
         public string Password { get; set; }

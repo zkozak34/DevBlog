@@ -1,16 +1,25 @@
 ﻿using DevBlog.Entities.Abstract;
 using DevBlog.Entities.Concrete;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace DevBlog.Repository.Context
 {
-    public class DevBlogDbContext : DbContext
+    public class DevBlogDbContext : IdentityDbContext<AppUser, AppRole, string>
     {
         public DevBlogDbContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Post> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Author> Authors { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<AppUser>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd();
+
+            base.OnModelCreating(builder);
+        }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {

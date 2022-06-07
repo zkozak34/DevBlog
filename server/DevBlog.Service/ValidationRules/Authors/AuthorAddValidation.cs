@@ -1,9 +1,9 @@
-﻿using DevBlog.Service.Services.Commands.Authors.Add;
+﻿using DevBlog.Service.Services.Commands.Authors.Create;
 using FluentValidation;
 
 namespace DevBlog.Service.ValidationRules.Authors
 {
-    public class AuthorAddValidation : AbstractValidator<AuthorAddCommand>
+    public class AuthorAddValidation : AbstractValidator<AuthorCreateCommand>
     {
         public AuthorAddValidation()
         {

@@ -41,7 +41,7 @@ namespace DevBlog.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(CategoryAddCommand categoryAddDto)
+        public async Task<IActionResult> Create(CategoryAddCommand categoryAddDto)
         {
             var response = await _mediator.Send(new CategoryAddCommand() { Title = categoryAddDto.Title, Path = categoryAddDto.Path });
             if (response.StatusCode == 204)

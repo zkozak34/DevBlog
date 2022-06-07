@@ -45,7 +45,7 @@ namespace DevBlog.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add(PostAddCommand postAddDto)
+        public async Task<IActionResult> Create(PostAddCommand postAddDto)
         {
             var response = await _mediator.Send(new PostAddCommand()
             {

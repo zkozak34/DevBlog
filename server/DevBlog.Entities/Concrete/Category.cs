@@ -6,6 +6,7 @@ namespace DevBlog.Entities.Concrete
     {
         public string Title { get; set; }
         public string Path { get; set; }
-        public virtual List<Post> Posts { get; set; }
+
+        public ICollection<Post> Posts { get; set; }
     }
 }

@@ -1,9 +1,9 @@
-﻿using DevBlog.Service.Services.Commands.Authors.Add;
+﻿using DevBlog.Service.Services.Commands.Authors.Create;
 using DevBlog.Service.Services.Commands.Authors.Delete;
+using DevBlog.Service.Services.Commands.Authors.Login;
 using DevBlog.Service.Services.Commands.Authors.Update;
 using DevBlog.Service.Services.Queries.Authors.GetAll;
 using DevBlog.Service.Services.Queries.Authors.GetById;
-using DevBlog.Service.Services.Queries.Authors.Login;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -42,16 +42,9 @@ namespace DevBlog.WebAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Add(AuthorAddCommand authorAddDto)
+        public async Task<IActionResult> Create(AuthorCreateCommand authorCreateCommand)
         {
-            var response = await _mediator.Send(new AuthorAddCommand()
-            {
-                Email = authorAddDto.Email,
-                FullName = authorAddDto.FullName,
-                Overview = authorAddDto.Overview,
-                Password = authorAddDto.Password,
-                ProfileImage = authorAddDto.ProfileImage
-            });
+            var response = await _mediator.Send(authorCreateCommand);
             if (response.StatusCode == 204)
                 return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
@@ -84,9 +77,9 @@ namespace DevBlog.WebAPI.Controllers
 
         [AllowAnonymous]
         [HttpPost("[action]")]
-        public async Task<IActionResult> Login([FromBody] AuthorLoginQuery authorLoginDto)
+        public async Task<IActionResult> Login(AuthorLoginCommand authorLoginCommand)
         {
-            var response = await _mediator.Send(new AuthorLoginQuery() { Email = authorLoginDto.Email, Password = authorLoginDto.Password });
+            var response = await _mediator.Send(authorLoginCommand);
             if (response.StatusCode == 204)
                 return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };

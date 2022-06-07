@@ -1,10 +1,11 @@
 ﻿using DevBlog.Core.Dtos.ResponseDto;
 using MediatR;
 
-namespace DevBlog.Service.Services.Commands.Authors.Add
+namespace DevBlog.Service.Services.Commands.Authors.Create
 {
-    public class AuthorAddCommand : IRequest<ResponseDto<NoContent>>
+    public class AuthorCreateCommand : IRequest<ResponseDto<NoContent>>
     {
+        public string Username { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }

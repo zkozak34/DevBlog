@@ -19,8 +19,6 @@ namespace DevBlog.Service.Services.Commands.Posts.Update
         {
             var responseFromDb = await _postReadRepository.GetByIdAsync(request.Id);
             responseFromDb.Overview = request.Overview;
-            responseFromDb.CategoryId = request.CategoryId;
-            responseFromDb.AuthorId = request.AuthorId;
             responseFromDb.Content = request.Content;
             responseFromDb.ThumbnailImage = request.ThumbnailImage;
             responseFromDb.Title = request.Title;

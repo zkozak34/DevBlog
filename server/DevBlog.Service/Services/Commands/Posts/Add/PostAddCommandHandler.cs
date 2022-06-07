@@ -19,8 +19,6 @@ namespace DevBlog.Service.Services.Commands.Posts.Add
             var responseFromDb = await _postWriteRepository.AddAsync(new Post()
             {
                 Overview = request.Overview,
-                AuthorId = request.AuthorId,
-                CategoryId = request.CategoryId,
                 Content = request.Content,
                 ThumbnailImage = request.ThumbnailImage,
                 Title = request.Title,
