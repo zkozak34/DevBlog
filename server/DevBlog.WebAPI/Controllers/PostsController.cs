@@ -83,6 +83,8 @@ namespace DevBlog.WebAPI.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             var response = await _mediator.Send(new PostDeleteCommand() { Id = id });
+            if (response.StatusCode == 204)
+                return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
@@ -91,6 +93,8 @@ namespace DevBlog.WebAPI.Controllers
         public async Task<IActionResult> Upload(Guid id)
         {
             var response = await _mediator.Send(new PostUploadCommand { PostId = id, Path = "resource\\post-images", File = Request.Form.Files.GetFile("file") });
+            if (response.StatusCode == 204)
+                return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
     }

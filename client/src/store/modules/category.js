@@ -19,13 +19,12 @@ export default {
     },
   },
   actions: {
-    fetchList({ commit }) {
+    fetchList({ commit, dispatch }) {
       commit("setIsLoaded", false);
       appAxios.get("categories").then(({ data }) => {
-        if (data.statusCode === 200 && data.data.length > 0) {
-          commit("setList", data.data);
-          commit("setIsLoaded", true);
-        }
+        commit("setList", data.data);
+        commit("setIsLoaded", true);
+        dispatch("loadApp", "", { root: true });
       });
     },
   },

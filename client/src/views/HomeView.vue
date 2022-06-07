@@ -31,7 +31,7 @@ export default {
     }),
   },
   mounted() {
-    this.pagination.page = Math.ceil(this.postList.length / this.pagination.pageSize);
+    this.pagination.page = Math.ceil(this.postList?.length / this.pagination.pageSize);
   },
   components: { WelcomeJumbotron, AppBody, PostList },
 };
