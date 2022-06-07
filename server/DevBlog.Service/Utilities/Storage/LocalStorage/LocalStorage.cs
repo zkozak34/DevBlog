@@ -20,7 +20,7 @@ namespace DevBlog.Service.Utilities.Storage.LocalStorage
                 Directory.CreateDirectory(uploadPath);
 
             if (oldFileName != null && HasFile(path, oldFileName))
-                await DeleteAsync(uploadPath, oldFileName);
+                Delete(uploadPath, oldFileName);
 
             string fileNewName = Guid.NewGuid() + Path.GetExtension(file.FileName);
             string fullUploadPath = Path.Combine(uploadPath, fileNewName);
@@ -30,7 +30,7 @@ namespace DevBlog.Service.Utilities.Storage.LocalStorage
             return fileNewName;
         }
 
-        public async Task DeleteAsync(string path, string fileName)
+        public void Delete(string path, string fileName)
         {
             try
             {

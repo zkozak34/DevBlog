@@ -2,7 +2,7 @@
 using DevBlog.Entities.Concrete;
 using Microsoft.EntityFrameworkCore;
 
-namespace DevBlog.Repository.Concrete.EntityFramework
+namespace DevBlog.Repository.Context
 {
     public class DevBlogDbContext : DbContext
     {

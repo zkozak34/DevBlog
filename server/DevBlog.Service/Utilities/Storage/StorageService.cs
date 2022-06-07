@@ -15,8 +15,8 @@ namespace DevBlog.Service.Utilities.Storage
         public async Task<string> UploadAsync(string pathOrContainerName, IFormFile file, string? oldFileName)
             => await _storage.UploadAsync(pathOrContainerName, file, oldFileName);
 
-        public async Task DeleteAsync(string pathOrContainerName, string fileName)
-            => await _storage.DeleteAsync(pathOrContainerName, fileName);
+        public void Delete(string pathOrContainerName, string fileName)
+            => _storage.Delete(pathOrContainerName, fileName);
 
         public List<string> GetFiles(string pathOrContainerName)
             => _storage.GetFiles(pathOrContainerName);

@@ -1,5 +1,5 @@
 ﻿using DevBlog.Repository.Abstract.Category;
-using DevBlog.Repository.Concrete.EntityFramework;
+using DevBlog.Repository.Context;
 
 namespace DevBlog.Repository.Repositories.Category
 {

@@ -3,6 +3,14 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# My Files
+appsettings.json
+TODOList.txt
+web.release.config
+wwwroot
+.config
+[Mm]igrations
+
 # User-specific files
 *.rsuser
 *.suo
@@ -362,9 +370,3 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /API/.idea/.idea.DevBlog/.idea
-
-appsettings.json
-wwwroot
-TODOList.txt
-[Mm]igrations
-.config

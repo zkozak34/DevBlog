@@ -1,9 +1,9 @@
-﻿using System.Net;
-using DevBlog.Core.Dtos.ResponseDto;
+﻿using DevBlog.Core.Dtos.ResponseDto;
 using DevBlog.Repository.Abstract.Post;
 using DevBlog.Service.Utilities.Storage.Abstraction;
 using MediatR;
 using Microsoft.AspNetCore.Hosting;
+using System.Net;
 
 namespace DevBlog.Service.Services.Commands.Posts.Upload
 {
@@ -30,7 +30,7 @@ namespace DevBlog.Service.Services.Commands.Posts.Upload
             {
                 post.ThumbnailImage = newFileName;
                 await _postWriteRepository.SaveAsync();
-                return ResponseDto<string>.Success(newFileName,200);
+                return ResponseDto<string>.Success(newFileName, 200);
             }
             return ResponseDto<string>.Fail((int)HttpStatusCode.BadRequest);
         }

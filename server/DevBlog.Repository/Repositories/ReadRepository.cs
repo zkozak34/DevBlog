@@ -1,6 +1,6 @@
 ﻿using DevBlog.Entities.Abstract;
 using DevBlog.Repository.Abstract;
-using DevBlog.Repository.Concrete.EntityFramework;
+using DevBlog.Repository.Context;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 

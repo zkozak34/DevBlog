@@ -1,5 +1,5 @@
 ﻿using DevBlog.Repository.Abstract.Post;
-using DevBlog.Repository.Concrete.EntityFramework;
+using DevBlog.Repository.Context;
 
 namespace DevBlog.Repository.Repositories.Post
 {

@@ -1,5 +1,4 @@
-﻿using DevBlog.Entities.Dtos.Post;
-using DevBlog.Service.Services.Commands.Posts.Add;
+﻿using DevBlog.Service.Services.Commands.Posts.Add;
 using FluentValidation;
 
 namespace DevBlog.Service.ValidationRules.Post

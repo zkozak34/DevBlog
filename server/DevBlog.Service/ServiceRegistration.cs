@@ -5,14 +5,14 @@ using DevBlog.Repository.Repositories.Author;
 using DevBlog.Repository.Repositories.Category;
 using DevBlog.Repository.Repositories.Post;
 using DevBlog.Service.Utilities.Security;
+using DevBlog.Service.Utilities.Storage;
+using DevBlog.Service.Utilities.Storage.Abstraction;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
 using System.Text;
-using DevBlog.Service.Utilities.Storage;
-using DevBlog.Service.Utilities.Storage.Abstraction;
 
 namespace DevBlog.Service
 {
@@ -22,8 +22,7 @@ namespace DevBlog.Service
 
         public static void AddBusinessService(this IServiceCollection service, string salt)
         {
-            service.AddMediatR(typeof(ServiceRegistration));
-            service.AddAutoMapper(Assembly.GetAssembly(typeof(ServiceRegistration)));
+            service.AddAutoMapper(Assembly.GetExecutingAssembly());
             service.AddScoped<IPostReadRepository, PostReadRepository>();
             service.AddScoped<IPostWriteRepository, PostWriteRepository>();
             service.AddScoped<IAuthorReadRepository, AuthorReadRepository>();
@@ -31,6 +30,7 @@ namespace DevBlog.Service
             service.AddScoped<ICategoryReadRepository, CategoryReadRepository>();
             service.AddScoped<ICategoryWriteRepository, CategoryWriteRepository>();
             service.AddScoped<IJWTAuthenticationManager, JWTAuthenticationManager>();
+            service.AddMediatR(Assembly.GetExecutingAssembly());
 
             service.AddScoped<IStorageService, StorageService>();
 
