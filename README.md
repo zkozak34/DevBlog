@@ -12,7 +12,7 @@ This is a simple personal blog website project which include .Net and VueJS fram
 
 2.  Setup database and create database table
 
-    We use MySQL as database in this project so you need to have MySQL server on your system. If you have a Docker, you can use **docker-compose.yml** file. For this go to main folder of project and than run `docker-compose up` command. If you did everything right, can access phpmyadmin with **http://localhost:8081**. After access phpmyadmin, import the **devblog.sql** file to set database tables. Docker-compose.yml file and appsettings.json file in WebAPI include connection string necessary.
+    We use MySQL as database in this project so you need to have MySQL server on your system. If you have a Docker, you can use **docker-compose.yml** file. For this go to main folder of project and than run `docker-compose up` command. If you did everything right, can access phpmyadmin with **http://localhost:8081**. All of the tables will be created after running the project. Docker-compose.yml file and appsettings.json file in WebAPI include connection string necessary.
 
     phpmyadmin username: root
     phpmyadmin password: 12345678
@@ -36,3 +36,4 @@ This is a simple personal blog website project which include .Net and VueJS fram
     yarn install
     yarn serve
     ```
+    *IMPORTANT: Not yet completed.*
