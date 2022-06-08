@@ -1,7 +1,5 @@
-﻿using DevBlog.Repository.Abstract.Author;
-using DevBlog.Repository.Abstract.Category;
+﻿using DevBlog.Repository.Abstract.Category;
 using DevBlog.Repository.Abstract.Post;
-using DevBlog.Repository.Repositories.Author;
 using DevBlog.Repository.Repositories.Category;
 using DevBlog.Repository.Repositories.Post;
 using DevBlog.Service.Utilities.Security;
@@ -25,8 +23,6 @@ namespace DevBlog.Service
             service.AddAutoMapper(Assembly.GetExecutingAssembly());
             service.AddScoped<IPostReadRepository, PostReadRepository>();
             service.AddScoped<IPostWriteRepository, PostWriteRepository>();
-            service.AddScoped<IAuthorReadRepository, AuthorReadRepository>();
-            service.AddScoped<IAuthorWriteRepository, AuthorWriteRepository>();
             service.AddScoped<ICategoryReadRepository, CategoryReadRepository>();
             service.AddScoped<ICategoryWriteRepository, CategoryWriteRepository>();
             service.AddScoped<IJWTAuthenticationManager, JWTAuthenticationManager>();

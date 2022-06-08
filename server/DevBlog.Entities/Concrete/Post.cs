@@ -9,7 +9,7 @@ namespace DevBlog.Entities.Concrete
         public string Overview { get; set; }
         public string ThumbnailImage { get; set; }
 
-        public AppUser Author { get; set; }
+        public AppUser User { get; set; }
         public Category Category { get; set; }
     }
 }

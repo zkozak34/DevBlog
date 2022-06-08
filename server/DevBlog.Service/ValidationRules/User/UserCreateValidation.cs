@@ -1,11 +1,11 @@
-﻿using DevBlog.Service.Services.Commands.Authors.Create;
+﻿using DevBlog.Service.Services.Commands.Users.Create;
 using FluentValidation;
 
-namespace DevBlog.Service.ValidationRules.Authors
+namespace DevBlog.Service.ValidationRules.User
 {
-    public class AuthorAddValidation : AbstractValidator<AuthorCreateCommand>
+    public class UserCreateValidation : AbstractValidator<UserCreateCommand>
     {
-        public AuthorAddValidation()
+        public UserCreateValidation()
         {
             RuleFor(x => x.Email)
                 .EmailAddress()
