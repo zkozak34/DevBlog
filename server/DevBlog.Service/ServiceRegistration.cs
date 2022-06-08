@@ -23,8 +23,6 @@ namespace DevBlog.Service
             service.AddAutoMapper(Assembly.GetExecutingAssembly());
             service.AddScoped<IPostReadRepository, PostReadRepository>();
             service.AddScoped<IPostWriteRepository, PostWriteRepository>();
-            service.AddScoped<IAuthorReadRepository, AuthorReadRepository>();
-            service.AddScoped<IAuthorWriteRepository, AuthorWriteRepository>();
             service.AddScoped<ICategoryReadRepository, CategoryReadRepository>();
             service.AddScoped<ICategoryWriteRepository, CategoryWriteRepository>();
             service.AddScoped<IJWTAuthenticationManager, JWTAuthenticationManager>();
