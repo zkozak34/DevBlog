@@ -41,10 +41,6 @@ var app = builder.Build();
 // Custom Middlewares
 app.UseMiddleware<IPAddressControlMiddleware>();
 app.UseGlobalExceptionMiddleware();
-using (var serviceScope = app.Services.GetService<IServiceScopeFactory>().CreateScope())
-{
-    ServiceRegistration.AddRepositoryServiceScope(serviceScope);
-}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

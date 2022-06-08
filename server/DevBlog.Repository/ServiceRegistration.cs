@@ -20,10 +20,5 @@ namespace DevBlog.Repository
                 options.User.RequireUniqueEmail = true;
             }).AddEntityFrameworkStores<DevBlogDbContext>();
         }
-        public static void AddRepositoryServiceScope(IServiceScope serviceScope)
-        {
-            var context = serviceScope.ServiceProvider.GetRequiredService<DevBlogDbContext>();
-            context.Database.EnsureCreated();
-        }
     }
 }

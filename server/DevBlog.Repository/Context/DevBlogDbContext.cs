@@ -7,7 +7,10 @@ namespace DevBlog.Repository.Context
 {
     public class DevBlogDbContext : IdentityDbContext<AppUser, AppRole, string>
     {
-        public DevBlogDbContext(DbContextOptions options) : base(options) { }
+        public DevBlogDbContext(DbContextOptions options) : base(options)
+        {
+            Database.EnsureCreated();
+        }
 
         public DbSet<Post> Posts { get; set; }
         public DbSet<Category> Categories { get; set; }
