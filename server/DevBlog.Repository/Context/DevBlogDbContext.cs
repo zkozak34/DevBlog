@@ -21,6 +21,10 @@ namespace DevBlog.Repository.Context
                 .Property(e => e.Id)
                 .ValueGeneratedOnAdd();
 
+            builder.Entity<AppRole>()
+                .Property(e => e.Id)
+                .ValueGeneratedOnAdd();
+
             base.OnModelCreating(builder);
         }
 

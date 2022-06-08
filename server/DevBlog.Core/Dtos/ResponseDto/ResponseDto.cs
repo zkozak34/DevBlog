@@ -23,6 +23,16 @@ namespace DevBlog.Core.Dtos.ResponseDto
         {
             return new ResponseDto<T>() { Data = data, StatusCode = statusCode };
         }
+        public static ResponseDto<T> Success(string message, int statusCode)
+        {
+            return new ResponseDto<T>() { Messages = new List<string>(){message}, StatusCode = statusCode };
+        }
+
+        public static ResponseDto<T> Success(List<string> message, int statusCode)
+        {
+            return new ResponseDto<T>() { Messages = message, StatusCode = statusCode };
+        }
+
         public static ResponseDto<T> Success(T data, string message, int statusCode)
         {
             return new ResponseDto<T>() { Data = data, Messages = new List<string>() { message }, StatusCode = statusCode };

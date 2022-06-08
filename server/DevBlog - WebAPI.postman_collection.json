@@ -11,6 +11,17 @@
 			"item": [
 				{
 					"name": "Get All",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "GET",
 						"header": [
@@ -165,6 +176,36 @@
 							]
 						},
 						"description": "**Don't forget to set a postId in url!**"
+					},
+					"response": []
+				},
+				{
+					"name": "Role Assign",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"Guid Id\",\r\n    \"role\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/authors/roleassign",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"authors",
+								"roleassign"
+							]
+						}
 					},
 					"response": []
 				}
@@ -370,7 +411,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"title\": \"string\",\r\n  \"content\": \"string\",\r\n  \"thumbnailImage\": \"string\",\r\n  \"authorId\": 0,\r\n  \"categoryId\": 0\r\n}",
+							"raw": "{\r\n  \"title\": \"string\",\r\n  \"content\": \"string\",\r\n  \"overview\": \"string\",\r\n  \"thumbnailImage\": \"string\",\r\n  \"authorId\": 0,\r\n  \"categoryId\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -471,6 +512,112 @@
 								"posts",
 								"upload",
 								"58"
+							]
+						},
+						"description": "**Don't forget to set a postId in url!**"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Role",
+			"item": [
+				{
+					"name": "Get All",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/roles",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"roleName\": \"string\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/roles",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"1\",\r\n    \"roleName\": \"newRoleName\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/roles",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"roles"
+							]
+						},
+						"description": "**Don't forget to set a postId in url!**"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://{{base_url}}:{{base_port}}/api/roles/1",
+							"protocol": "https",
+							"host": [
+								"{{base_url}}"
+							],
+							"port": "{{base_port}}",
+							"path": [
+								"api",
+								"roles",
+								"1"
 							]
 						},
 						"description": "**Don't forget to set a postId in url!**"

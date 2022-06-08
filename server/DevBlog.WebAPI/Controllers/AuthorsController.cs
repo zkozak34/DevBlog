@@ -1,6 +1,7 @@
 ﻿using DevBlog.Service.Services.Commands.Authors.Create;
 using DevBlog.Service.Services.Commands.Authors.Delete;
 using DevBlog.Service.Services.Commands.Authors.Login;
+using DevBlog.Service.Services.Commands.Authors.RoleAssign;
 using DevBlog.Service.Services.Commands.Authors.Update;
 using DevBlog.Service.Services.Queries.Authors.GetAll;
 using DevBlog.Service.Services.Queries.Authors.GetById;
@@ -80,6 +81,15 @@ namespace DevBlog.WebAPI.Controllers
         public async Task<IActionResult> Login(AuthorLoginCommand authorLoginCommand)
         {
             var response = await _mediator.Send(authorLoginCommand);
+            if (response.StatusCode == 204)
+                return NoContent();
+            return new ObjectResult(response) { StatusCode = response.StatusCode };
+        }
+
+        [HttpPost("[action]")]
+        public async Task<IActionResult> RoleAssign(AuthorRoleAssignCommand authorRoleAssignCommand)
+        {
+            var response = await _mediator.Send(authorRoleAssignCommand);
             if (response.StatusCode == 204)
                 return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
