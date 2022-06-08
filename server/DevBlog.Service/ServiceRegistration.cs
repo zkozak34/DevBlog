@@ -1,7 +1,5 @@
-﻿using DevBlog.Repository.Abstract.Author;
-using DevBlog.Repository.Abstract.Category;
+﻿using DevBlog.Repository.Abstract.Category;
 using DevBlog.Repository.Abstract.Post;
-using DevBlog.Repository.Repositories.Author;
 using DevBlog.Repository.Repositories.Category;
 using DevBlog.Repository.Repositories.Post;
 using DevBlog.Service.Utilities.Security;

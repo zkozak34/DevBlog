@@ -1,11 +1,11 @@
-﻿using DevBlog.Service.Services.Commands.Authors.Update;
+﻿using DevBlog.Service.Services.Commands.Users.Update;
 using FluentValidation;
 
-namespace DevBlog.Service.ValidationRules.Authors
+namespace DevBlog.Service.ValidationRules.User
 {
-    public class AuthorUpdateValidation : AbstractValidator<AuthorUpdateCommand>
+    public class UserUpdateValidation : AbstractValidator<UserUpdateCommand>
     {
-        public AuthorUpdateValidation()
+        public UserUpdateValidation()
         {
             RuleFor(x => x.Email)
                 .EmailAddress()

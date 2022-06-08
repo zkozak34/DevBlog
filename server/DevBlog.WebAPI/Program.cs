@@ -6,7 +6,6 @@ using DevBlog.WebAPI.Middlewares;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.FileProviders;
-using ServiceRegistration = DevBlog.Repository.ServiceRegistration;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.WebHost.ConfigureKestrel(options => options.AddServerHeader = false);
