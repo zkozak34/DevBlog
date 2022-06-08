@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-using DevBlog.Core.Dtos.ResponseDto;
+﻿using DevBlog.Core.Dtos.ResponseDto;
 using DevBlog.Entities.Concrete;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using System.Net;
 
 namespace DevBlog.Service.Services.Commands.Roles.Update
 {
@@ -27,7 +22,7 @@ namespace DevBlog.Service.Services.Commands.Roles.Update
             {
                 existRole.Name = request.RoleName;
                 IdentityResult result = await _roleManager.UpdateAsync(existRole);
-                if(result.Succeeded)
+                if (result.Succeeded)
                     return ResponseDto<NoContent>.Success("Güncelleme işlemi başarılı.", 200);
                 return ResponseDto<NoContent>.Fail("Rol güncelleme işleminde bir hata meydana geldi.", (int)HttpStatusCode.InternalServerError);
             }

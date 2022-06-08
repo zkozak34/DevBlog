@@ -1,19 +1,21 @@
-﻿using DevBlog.Service.Services.Commands.Roles.Create;
-using DevBlog.Service.Services.Commands.Roles.Delete;
-using DevBlog.Service.Services.Commands.Roles.Update;
-using DevBlog.Service.Services.Queries.Roles;
+﻿using DevBlog.Service.Services.Commands.Users.Create;
+using DevBlog.Service.Services.Commands.Users.Login;
+using DevBlog.Service.Services.Commands.Users.RoleAssign;
+using DevBlog.Service.Services.Queries.Users.GetAll;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DevBlog.WebAPI.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class RolesController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public RolesController(IMediator mediator)
+        public UsersController(IMediator mediator)
         {
             _mediator = mediator;
         }
@@ -21,34 +23,37 @@ namespace DevBlog.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var response = await _mediator.Send(new RoleGetAllQuery());
+            var response = await _mediator.Send(new UserGetAllQuery());
             if (response.StatusCode == 204)
                 return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
+
+        [AllowAnonymous]
         [HttpPost]
-        public async Task<IActionResult> Create(RoleCreateCommand roleCreateCommand)
+        public async Task<IActionResult> Create(UserCreateCommand userCreateCommand)
         {
-            var response = await _mediator.Send(roleCreateCommand);
+            var response = await _mediator.Send(userCreateCommand);
             if (response.StatusCode == 204)
                 return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
-        [HttpPut]
-        public async Task<IActionResult> Update(RoleUpdateCommand roleUpdateCommand)
+        [AllowAnonymous]
+        [HttpPost("[action]")]
+        public async Task<IActionResult> Login(UserLoginCommand userLoginCommand)
         {
-            var response = await _mediator.Send(roleUpdateCommand);
+            var response = await _mediator.Send(userLoginCommand);
             if (response.StatusCode == 204)
                 return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        [HttpPost("[action]")]
+        public async Task<IActionResult> RoleAssign(UserRoleAssignCommand userRoleAssignCommand)
         {
-            var response = await _mediator.Send(new RoleDeleteCommand() { Id = id });
+            var response = await _mediator.Send(userRoleAssignCommand);
             if (response.StatusCode == 204)
                 return NoContent();
             return new ObjectResult(response) { StatusCode = response.StatusCode };

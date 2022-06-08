@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using DevBlog.Entities.Concrete;
-using DevBlog.Entities.Dtos.Author;
 using DevBlog.Entities.Dtos.Category;
 using DevBlog.Entities.Dtos.Post;
+using DevBlog.Entities.Dtos.User;
 
 namespace DevBlog.Service.Utilities.Mapper
 {
@@ -11,7 +11,7 @@ namespace DevBlog.Service.Utilities.Mapper
         public MappingProfile()
         {
 
-            CreateMap<Author, AuthorDto>().ReverseMap();
+            CreateMap<AppUser, UserDto>().ReverseMap();
 
             CreateMap<Post, PostDto>().ReverseMap();
 

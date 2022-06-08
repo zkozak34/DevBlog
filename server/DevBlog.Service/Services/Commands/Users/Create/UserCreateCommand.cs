@@ -1,14 +1,15 @@
-﻿using DevBlog.Entities.Abstract;
+﻿using DevBlog.Core.Dtos.ResponseDto;
+using MediatR;
 
-namespace DevBlog.Entities.Concrete
+namespace DevBlog.Service.Services.Commands.Users.Create
 {
-    public class Author : BaseEntity
+    public class UserCreateCommand : IRequest<ResponseDto<NoContent>>
     {
+        public string Username { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
         public string ProfileImage { get; set; }
         public string Overview { get; set; }
-        public virtual List<Post> Posts { get; set; }
     }
 }

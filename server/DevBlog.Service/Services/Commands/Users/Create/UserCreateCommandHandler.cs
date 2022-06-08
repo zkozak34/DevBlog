@@ -4,18 +4,18 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using System.Net;
 
-namespace DevBlog.Service.Services.Commands.Authors.Create
+namespace DevBlog.Service.Services.Commands.Users.Create
 {
-    public class AuthorCreateCommandHandler : IRequestHandler<AuthorCreateCommand, ResponseDto<NoContent>>
+    public class UserCreateCommandHandler : IRequestHandler<UserCreateCommand, ResponseDto<NoContent>>
     {
         private readonly UserManager<AppUser> _userManager;
 
-        public AuthorCreateCommandHandler(UserManager<AppUser> userManager)
+        public UserCreateCommandHandler(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
         }
 
-        public async Task<ResponseDto<NoContent>> Handle(AuthorCreateCommand request, CancellationToken cancellationToken)
+        public async Task<ResponseDto<NoContent>> Handle(UserCreateCommand request, CancellationToken cancellationToken)
         {
             var responseFromDb = await _userManager.FindByEmailAsync(request.Email);
             if (responseFromDb != null)

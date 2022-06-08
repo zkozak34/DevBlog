@@ -51,7 +51,7 @@ namespace DevBlog.WebAPI.Controllers
             {
                 Overview = postAddDto.Overview,
                 CategoryId = postAddDto.CategoryId,
-                AuthorId = postAddDto.AuthorId,
+                UserId = postAddDto.UserId,
                 Content = postAddDto.Content,
                 ThumbnailImage = postAddDto.ThumbnailImage,
                 Title = postAddDto.Title
@@ -69,7 +69,7 @@ namespace DevBlog.WebAPI.Controllers
                 Id = postUpdateDto.Id,
                 Overview = postUpdateDto.Overview,
                 CategoryId = postUpdateDto.CategoryId,
-                AuthorId = postUpdateDto.AuthorId,
+                UserId = postUpdateDto.UserId,
                 Content = postUpdateDto.Content,
                 ThumbnailImage = postUpdateDto.ThumbnailImage,
                 Title = postUpdateDto.Title

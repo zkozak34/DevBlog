@@ -1,6 +1,6 @@
-﻿namespace DevBlog.Entities.Dtos.Author
+﻿namespace DevBlog.Entities.Dtos.User
 {
-    public class AuthorDto
+    public class UserDto
     {
         public string FullName { get; set; }
         public string Email { get; set; }

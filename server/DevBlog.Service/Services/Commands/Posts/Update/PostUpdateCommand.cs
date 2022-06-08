@@ -14,7 +14,7 @@ namespace DevBlog.Service.Services.Commands.Posts.Update
 
         public string ThumbnailImage { get; set; }
 
-        public int AuthorId { get; set; }
+        public int UserId { get; set; }
 
         public int CategoryId { get; set; }
     }
